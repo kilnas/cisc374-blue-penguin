@@ -4,7 +4,9 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 function preload() {
 
     game.load.spritesheet('spinner', 'assets/sprites/bluemetal_32x32x4.png', 32, 32);
-
+    game.load.image('phaser', 'assets/sprites/phaser2.png');
+    game.load.script('filterX', 'js/lib/filters/BlurX.js');
+    game.load.script('filterY', 'js/lib/filters/BlurY.js');
 
 }
 
@@ -15,6 +17,17 @@ var cursors;
 
 function create() {
 
+
+    var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
+	 logo.anchor.setTo(0.5, 0.5);
+
+	  var blurX = game.add.filter('BlurX');
+    var blurY = game.add.filter('BlurY');
+
+    blurX.blur = 100;
+    blurY.blur = 1;
+
+	  logo.filters = [blurX, blurY];
     //  Here we create a group, populate it with sprites, give them all a random velocity
     //  and then check the group against itself for collision
 
