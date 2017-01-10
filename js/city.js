@@ -10,7 +10,7 @@ MonsterMystery.City = function (game, x) {
 }
 
 MonsterMystery.City.prototype = Object.create(Phaser.Sprite.prototype);
-MonsterMystery.City.prototype.constructor = MissileCommand.City;
+MonsterMystery.City.prototype.constructor = MonsterMystery.City;
 
 MonsterMystery.City.prototype.nuked = function () {
 
