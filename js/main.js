@@ -18,6 +18,8 @@ function preload() {
 
 var sprites;
 var cursors;
+var testImage;
+
 
 
 function create() {
@@ -26,9 +28,9 @@ function create() {
     var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
 	 logo.anchor.setTo(0.5, 0.5);
 
-	  var blurX = game.add.filter('BlurX');
-    var blurY = game.add.filter('BlurY');
-    var gray = game.add.filter('Gray');
+   var blurX = game.add.filter('BlurX');
+   var blurY = game.add.filter('BlurY');
+   var gray = game.add.filter('Gray');
 
     blurX.blur = 100;
     blurY.blur = 1;
@@ -40,10 +42,13 @@ function create() {
     sprites = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
 
+    testImage = new MonsterMystery.GameImage(game, 'spinner', 50, 50, gray);
+    console.log(testImage);
+    testImage.toggle();
 
 
 
-
+/*
     for (var i = 0; i < 90; i++)
     {
         var s = sprites.create(game.rnd.integerInRange(100, 700), game.rnd.integerInRange(32, 200), 'spinner');
@@ -56,10 +61,13 @@ function create() {
     sprites.setAll('body.bounce.x', 1);
     sprites.setAll('body.bounce.y', 1);
 
+  */
+
 }
 
 
 function update(){
   game.physics.arcade.collide(sprites);
+
 
 }
