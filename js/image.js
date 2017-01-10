@@ -1,7 +1,7 @@
 MonsterMystery.GameImage = function(game, asset, x, y, filter){
 
   //make image a new Sprite
-  Phaser.Sprite.call(this, game, x, y, asset, 0);
+  Phaser.Sprite.call(this, game, x, y, asset, 4);
 
   this.filtered = false;
   this.filter = filter;
