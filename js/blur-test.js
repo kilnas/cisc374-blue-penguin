@@ -1,12 +1,17 @@
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
+MonsterMystery = {
+
+}
+
 function preload() {
 
     game.load.spritesheet('spinner', 'assets/sprites/bluemetal_32x32x4.png', 32, 32);
     game.load.image('phaser', 'assets/sprites/phaser2.png');
     game.load.script('filterX', 'js/lib/filters/BlurX.js');
     game.load.script('filterY', 'js/lib/filters/BlurY.js');
+    game.load.script('gray', 'js/lib/filters/Gray.js');
 
 }
 
@@ -23,15 +28,17 @@ function create() {
 
 	  var blurX = game.add.filter('BlurX');
     var blurY = game.add.filter('BlurY');
+    var gray = game.add.filter('Gray');
 
     blurX.blur = 100;
     blurY.blur = 1;
 
-	  logo.filters = [blurX, blurY];
+	  logo.filters = [blurX, blurY, gray];
     //  Here we create a group, populate it with sprites, give them all a random velocity
     //  and then check the group against itself for collision
 
     sprites = game.add.physicsGroup(Phaser.Physics.ARCADE);
+
 
 
 
@@ -53,5 +60,6 @@ function create() {
 
 
 function update(){
+  game.physics.arcade.collide(sprites);
 
 }
