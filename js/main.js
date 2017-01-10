@@ -7,6 +7,7 @@ function preload() {
     game.load.image('phaser', 'assets/sprites/phaser2.png');
     game.load.script('filterX', 'js/lib/filters/BlurX.js');
     game.load.script('filterY', 'js/lib/filters/BlurY.js');
+    game.load.script('gray', 'js/lib/filters/Gray.js');
 
 }
 
@@ -37,6 +38,7 @@ function create() {
 
 
 
+
     for (var i = 0; i < 90; i++)
     {
         var s = sprites.create(game.rnd.integerInRange(100, 700), game.rnd.integerInRange(32, 200), 'spinner');
@@ -53,5 +55,6 @@ function create() {
 
 
 function update(){
+  game.physics.arcade.collide(sprites);
 
 }
