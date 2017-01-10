@@ -21,11 +21,6 @@ function create() {
     sprites = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
 
-    //allow player to move
-    game.physics.arcade.enable(player);
-    player.body.collideWorldBounds = true;
-    cursors = game.input.keyboard.createCursorKeys();
-
 
 
 
