@@ -26,16 +26,19 @@ function create() {
 
 
     var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
+
 	 logo.anchor.setTo(0.5, 0.5);
 
    var blurX = game.add.filter('BlurX');
    var blurY = game.add.filter('BlurY');
    var gray = game.add.filter('Gray');
 
+
     blurX.blur = 100;
     blurY.blur = 1;
 
 	  logo.filters = [blurX, blurY, gray];
+
     //  Here we create a group, populate it with sprites, give them all a random velocity
     //  and then check the group against itself for collision
 
@@ -43,8 +46,10 @@ function create() {
 
 
     testImage = new MonsterMystery.GameImage(game, 'spinner', 50, 50, gray);
+
     console.log(testImage);
     testImage.toggle();
+
 
 
 
@@ -67,7 +72,11 @@ function create() {
 
 
 function update(){
+<<<<<<< HEAD
   game.physics.arcade.collide(sprites);
+=======
+    game.physics.arcade.collide(sprites);
+>>>>>>> 0cd0190dcaaffbd818bf5b38d59c18710d388249
 
 
 }
