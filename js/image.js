@@ -1,12 +1,15 @@
 MonsterMystery.GameImage = function(game, asset, x, y, filter){
 
   //make image a new Sprite
-  Phaser.Sprite.call(this, game, x, y, asset, 4);
+  Phaser.Sprite.call(this, game, x, y, asset);
 
   this.filtered = false;
   this.filter = filter;
 
-  this.mySprite = game.add.sprite(x, y, asset);
+  this.inputEnabled = true;
+  this.events.onInputDown.add(this.toggle);
+
+  game.add.existing(this);
 
   return this;
 
@@ -15,16 +18,27 @@ MonsterMystery.GameImage = function(game, asset, x, y, filter){
 MonsterMystery.GameImage.prototype = Object.create(Phaser.Sprite.prototype);
 MonsterMystery.GameImage.prototype.constructor = MonsterMystery.GameImage;
 
+MonsterMystery.GameImage.prototype.update = function() {
+  if (this.filtered) {
+    this.filters = [ ];
+  }
+  else {
+    this.filters = [ this.filter ];
+  }
+}
+
 //This is the function to toggle the filter that is on the image
 MonsterMystery.GameImage.prototype.toggle = function(){
 
   if(this.filtered){
+    console.log("none");
     this.filtered = false;
-    this.mySprite.filters = [ ];
+    // this.filters = [ ];
   }
   else{
+    console.log("gray");
     this.filtered = true;
-    this.mySprite.filters = [ this.filter ];
+    // this.filters = [ this.filter ];
   }
 
 }
