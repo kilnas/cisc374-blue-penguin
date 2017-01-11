@@ -22,7 +22,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.P2JS);
 
     player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
-    
+
     npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
 
     game.physics.p2.enable(player);
@@ -38,8 +38,8 @@ function update() {
 
     player.body.setZeroVelocity();
 
-    
-    
+
+
     if (cursors.up.isDown)
     {
         player.body.moveUp(300)
