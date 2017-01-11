@@ -1,7 +1,7 @@
 MonsterMystery.GameImage = function(game, asset, x, y, filter){
 
   //make image a new Sprite
-  Phaser.Sprite.call(this, game, x, y, asset, 4);
+  Phaser.Sprite.call(this, game, x, y, asset, 0);
 
   this.filtered = false;
   this.filter = filter;
@@ -20,7 +20,7 @@ MonsterMystery.GameImage.prototype.toggle = function(){
 
   if(this.filtered){
     this.filtered = false;
-    this.mySprite.filters = [ ];
+    this.mySprite.filters = [];
   }
   else{
     this.filtered = true;
