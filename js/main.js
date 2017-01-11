@@ -47,9 +47,11 @@ function create() {
 
     testImage = new MonsterMystery.GameImage(game, 'spinner', 50, 50, gray);
 
-    console.log(testImage);
-    testImage.toggle();
+    //enable inputs on testImage
+    testImage.inputEnabled = true;
+    testImage.events.onInputDown.add(listener, this);
 
+    console.log(testImage);
 
 
 
@@ -76,5 +78,8 @@ function update(){
   game.physics.arcade.collide(sprites);
 
 
+}
 
+function listener(){
+  testImage.toggle();
 }
