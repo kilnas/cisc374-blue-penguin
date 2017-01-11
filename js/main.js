@@ -25,8 +25,8 @@ var testImage;
 function create() {
 
 
-    var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
-    logo.anchor.setTo(0.5, 0.5);
+    // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
+    // logo.anchor.setTo(0.5, 0.5);
 
     var blurX = game.add.filter('BlurX');
     var blurY = game.add.filter('BlurY');
@@ -35,14 +35,14 @@ function create() {
     blurX.blur = 100;
     blurY.blur = 1;
 
-	logo.filters = [blurX, blurY, gray];
+	// logo.filters = [blurX, blurY, gray];
     //  Here we create a group, populate it with sprites, give them all a random velocity
     //  and then check the group against itself for collision
 
     sprites = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
 
-    testImage = new MonsterMystery.GameImage(game, 'spinner', 50, 50, gray);
+    testImage = new MonsterMystery.GameImage(game, 'phaser', game.world.centerX, game.world.centerY, gray);
     // testImage.toggle();
     // console.log(testImage);
     // testImage.toggle();
