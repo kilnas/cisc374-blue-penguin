@@ -8,7 +8,9 @@ MonsterMystery.GameImage = function(game, asset, x, y, filter){
   this.filter = filter;
 
   this.inputEnabled = true;
-  this.events.onInputDown.add(this.toggle);
+  this.events.onInputDown.add(this.toggle, this);
+  this.toggle();
+  this.toggle();
 
   game.add.existing(this);
 
@@ -20,6 +22,14 @@ MonsterMystery.GameImage.prototype = Object.create(Phaser.Sprite.prototype);
 MonsterMystery.GameImage.prototype.constructor = MonsterMystery.GameImage;
 
 
+MonsterMystery.GameImage.prototype.update = function() {
+  // if (this.filtered) {
+  //   this.filters = [ ];
+  // }
+  // else {
+  //   this.filters = [ this.filter ];
+  // }
+}
 
 //This is the function to toggle the filter that is on the image
 MonsterMystery.GameImage.prototype.toggle = function(){
@@ -33,7 +43,9 @@ MonsterMystery.GameImage.prototype.toggle = function(){
   else{
     console.log("gray");
     this.filtered = true;
-    this.filters = [ this.filter ]
+
+    this.filters = [ this.filter ];
+    console.log(this.filters);
   }
 
 }
