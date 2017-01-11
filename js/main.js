@@ -72,11 +72,9 @@ function create() {
 
 
 function update(){
-<<<<<<< HEAD
+
   game.physics.arcade.collide(sprites);
-=======
-    game.physics.arcade.collide(sprites);
->>>>>>> 0cd0190dcaaffbd818bf5b38d59c18710d388249
+
 
 
 }
