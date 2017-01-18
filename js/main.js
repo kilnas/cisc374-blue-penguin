@@ -139,21 +139,24 @@ function update(){
 
     //Touch Based Movement
     //ActivePointer should be mouse OR finger, depending on device
-    if (game.input.activePointer.isDown)
-    {
-        //  400 is the speed it will move towards the touch
-        game.physics.arcade.moveToPointer(player, 400);
 
-        //  if it's overlapping the touch, don't move any more
-        if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
-        {
-            player.body.velocity.setTo(0, 0);
-        }
-    }
-    else
-    {
-        player.body.velocity.setTo(0, 0);
-    }
+    if(createTextFlag == false){// if text box not up, move
+      if (game.input.activePointer.isDown)
+      {
+          //  400 is the speed it will move towards the touch
+          game.physics.arcade.moveToPointer(player, 400);
+
+          //  if it's overlapping the touch, don't move any more
+          if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
+          {
+              player.body.velocity.setTo(0, 0);
+          }
+      }
+      else
+      {
+          player.body.velocity.setTo(0, 0);
+      }
+  }
 
 
 
@@ -267,6 +270,7 @@ function removeText() {
   textBG.destroy();
   textBG.alpha = 0;
     text.destroy();
+    createTextFlag = false;
     // if(game.paused == true){
     //   game.paused = false;
     // }
