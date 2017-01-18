@@ -123,6 +123,7 @@ function create() {
 
 
  spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+ game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 
 
 }
@@ -179,6 +180,11 @@ function update(){
         player.body.velocity.x = 300;
     }*/
 
+
+    if (spacebar.isDown)
+    {
+      removeText();
+    }
 
 
 
@@ -248,13 +254,10 @@ function createText() {
 
     nextLine();
     createTextFlag = true;
-    game.input.onDown.addOnce(removeText, this);
+    //game.input.onDown.addOnce(removeText, this);
 
 
-        // if (spacebar.isDown)
-        // {
-        //   removeText();
-        // }
+
 
 }
 
