@@ -134,15 +134,15 @@ function update(){
     player.body.angularVelocity = 0;
 
     game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-    
-    
+
+
     //Touch Based Movement
     //ActivePointer should be mouse OR finger, depending on device
     if (game.input.activePointer.isDown)
     {
         //  400 is the speed it will move towards the touch
         game.physics.arcade.moveToPointer(player, 400);
-        
+
         //  if it's overlapping the touch, don't move any more
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
         {
@@ -153,9 +153,9 @@ function update(){
     {
         player.body.velocity.setTo(0, 0);
     }
-    
-    
-    
+
+
+
 /*
  Arrow Key Movement (Old)
     if (cursors.up.isDown)
@@ -180,10 +180,6 @@ function update(){
     }*/
 
 
-    if (spacebar.isDown)
-    {
-      consple.log('you pressed space');
-    }
 
 
 }
@@ -202,8 +198,8 @@ function collisionHandler (obj1, obj2) {
 
 function render() {
 
-    game.debug.cameraInfo(game.camera, 32, 32);
-    game.debug.spriteCoords(player, 32, 500);
+    //game.debug.cameraInfo(game.camera, 32, 32);
+    //game.debug.spriteCoords(player, 32, 500);
 
 }
 
@@ -211,6 +207,7 @@ function render() {
 
 function createText() {
 
+    //game.paused = true;
     textBG = game.add.sprite(player.x, player.y, 'pic');
     textBG.scale.setTo(.8, .8);
     textBG.x = textBG.x - textBG.width/2;
@@ -253,6 +250,12 @@ function createText() {
     createTextFlag = true;
     game.input.onDown.addOnce(removeText, this);
 
+
+        // if (spacebar.isDown)
+        // {
+        //   removeText();
+        // }
+
 }
 
 
@@ -261,6 +264,9 @@ function removeText() {
   textBG.destroy();
   textBG.alpha = 0;
     text.destroy();
+    // if(game.paused == true){
+    //   game.paused = false;
+    // }
 }
 
 function updateText(){
