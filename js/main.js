@@ -134,8 +134,30 @@ function update(){
     player.body.angularVelocity = 0;
 
     game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-
-
+    
+    
+    //Touch Based Movement
+    //ActivePointer should be mouse OR finger, depending on device
+    if (game.input.activePointer.isDown)
+    {
+        //  400 is the speed it will move towards the touch
+        game.physics.arcade.moveToPointer(player, 400);
+        
+        //  if it's overlapping the touch, don't move any more
+        if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
+        {
+            player.body.velocity.setTo(0, 0);
+        }
+    }
+    else
+    {
+        player.body.velocity.setTo(0, 0);
+    }
+    
+    
+    
+/*
+ Arrow Key Movement (Old)
     if (cursors.up.isDown)
     {
         //player.body.moveUp(300)
@@ -155,7 +177,7 @@ function update(){
     {
         //player.body.moveRight(300);
         player.body.velocity.x = 300;
-    }
+    }*/
 
 
     if (spacebar.isDown)
