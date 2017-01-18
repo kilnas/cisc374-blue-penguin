@@ -53,7 +53,6 @@ function create() {
 
     game.camera.follow(player);
 
-	 logo.anchor.setTo(0.5, 0.5);
 
    var blurX = game.add.filter('BlurX');
    var blurY = game.add.filter('BlurY');
@@ -136,8 +135,9 @@ function collisionHandler (obj1, obj2) {
 
 function render() {
 
-    game.debug.cameraInfo(game.camera, 32, 32);
-    game.debug.spriteCoords(player, 32, 500);
+  game.debug.cameraInfo(game.camera, 32, 32);
+  game.debug.spriteCoords(player, 32, 500);
+}
 
 function listener(){
   testImage.toggle();
