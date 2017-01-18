@@ -33,6 +33,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+
     npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
 
     //game.physics.p2.enable(player);
@@ -64,8 +65,12 @@ function update() {
     player.body.velocity.setTo(0, 0);
     player.body.angularVelocity = 0;
 
+<<<<<<< HEAD
+
+=======
     game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-    
+
+>>>>>>> origin/master
 
     if (cursors.up.isDown)
     {
