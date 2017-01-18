@@ -73,7 +73,7 @@ function create() {
 
 
     var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
-    text2 = game.add.text(game.world.centerX - 40, game.world.centerY -50, "- text on a sprite -\ndrag me", style);
+    text2 = game.add.text(game.world.centerX - 40, game.world.centerY -50, "PRESS SPACE", style);
    text2.anchor.set(0.5);
 
 
