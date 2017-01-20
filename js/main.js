@@ -44,8 +44,9 @@ function preload() {
   game.load.image('npc','assets/sprites/sonic_havok_sanity.png');
   game.load.image('player','assets/sprites/phaser-dude.png');
 
-  game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-  game.load.image('pic', '../assets/skies/underwater3.png');
+
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+    game.load.image('pic', 'assets/skies/underwater3.png');
 }
 
 
