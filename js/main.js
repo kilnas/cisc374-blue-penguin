@@ -131,11 +131,10 @@ var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth
 //text2.anchor.set(0.5);
 
 
-spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 
-//test for compareImages
-console.log(compareImages(testImage, testImage2));
+ spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+ game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 
 
 }
@@ -160,22 +159,58 @@ function update(){
     //player.body.moveDown(300);
     player.body.velocity.y = 300;
   }
+    //Touch Based Movement
+    //ActivePointer should be mouse OR finger, depending on device
 
-  if (cursors.left.isDown)
-  {
-    player.body.velocity.x = -300;
-  }
-  else if (cursors.right.isDown)
-  {
-    //player.body.moveRight(300);
-    player.body.velocity.x = 300;
+    if(createTextFlag == false){// if text box not up, move
+      if (game.input.activePointer.isDown)
+      {
+          //  400 is the speed it will move towards the touch
+          game.physics.arcade.moveToPointer(player, 400);
+
+          //  if it's overlapping the touch, don't move any more
+          if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
+          {
+              player.body.velocity.setTo(0, 0);
+          }
+      }
+      else
+      {
+          player.body.velocity.setTo(0, 0);
+      }
   }
 
 
-  if (spacebar.isDown)
-  {
-    consple.log('you pressed space');
-  }
+
+/*
+ Arrow Key Movement (Old)
+    if (cursors.up.isDown)
+    {
+        //player.body.moveUp(300)
+        player.body.velocity.y = -300;
+    }
+    else if (cursors.down.isDown)
+    {
+        //player.body.moveDown(300);
+        player.body.velocity.y = 300;
+    }
+
+    if (cursors.left.isDown)
+    {
+        player.body.velocity.x = -300;
+    }
+    else if (cursors.right.isDown)
+    {
+        //player.body.moveRight(300);
+        player.body.velocity.x = 300;
+    }*/
+
+
+    if (spacebar.isDown)
+    {
+      removeText();
+    }
+
 
 
 }
@@ -198,6 +233,7 @@ function render() {
   game.debug.spriteCoords(player, 32, 500);
 }
 
+
 function listener(){
   testImage.toggle();
 }
@@ -210,6 +246,7 @@ function createText() {
   textBG.scale.setTo(.8, .8);
   textBG.x = textBG.x - textBG.width/2;
   textBG.y = textBG.y - textBG.height/2;
+
 
   textBG.alpha = .8;
 
@@ -248,6 +285,7 @@ function createText() {
   createTextFlag = true;
   game.input.onDown.addOnce(removeText, this);
 
+
 }
 
 
@@ -255,7 +293,11 @@ function createText() {
 function removeText() {
   textBG.destroy();
   textBG.alpha = 0;
-  text.destroy();
+    text.destroy();
+    createTextFlag = false;
+    // if(game.paused == true){
+    //   game.paused = false;
+    // }
 }
 
 function updateText(){
