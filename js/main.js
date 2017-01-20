@@ -8,9 +8,9 @@ MonsterMystery = {
 
 
 WebFontConfig = { // load custom google fonts
-    google: {
-      families: ['Coming Soon']
-    }
+  google: {
+    families: ['Coming Soon']
+  }
 
 };
 
@@ -35,23 +35,24 @@ var lineDelay = 400;
 
 function preload() {
 
-    game.load.image('phaser', 'assets/sprites/phaser2.png');
-    game.load.script('filterX', 'js/lib/filters/BlurX.js');
-    game.load.script('filterY', 'js/lib/filters/BlurY.js');
-    game.load.script('gray', 'js/lib/filters/Gray.js');
+  game.load.image('phaser', 'assets/sprites/phaser2.png');
+  game.load.script('filterX', 'js/lib/filters/BlurX.js');
+  game.load.script('filterY', 'js/lib/filters/BlurY.js');
+  game.load.script('gray', 'js/lib/filters/Gray.js');
 
-    game.load.image('background','assets/tests/debug-grid-1920x1920.png');
-    game.load.image('npc','assets/sprites/sonic_havok_sanity.png')
-    game.load.image('player','assets/sprites/phaser-dude.png');
+  game.load.image('background','assets/tests/debug-grid-1920x1920.png');
+  game.load.image('npc','assets/sprites/sonic_havok_sanity.png');
+  game.load.image('player','assets/sprites/phaser-dude.png');
 
-    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-    game.load.image('pic', '../assets/skies/underwater3.png');
+  game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+  game.load.image('pic', '../assets/skies/underwater3.png');
 }
 
 
 var sprites;
 var cursors;
 var testImage;
+var testImage2;
 
 var player;
 var npc;
@@ -63,71 +64,78 @@ function create() {
 
 
 
-    // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
-    // logo.anchor.setTo(0.5, 0.5);
+  // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
+  // logo.anchor.setTo(0.5, 0.5);
 
-    game.add.tileSprite(0, 0, 1920, 1920, 'background');
-    game.world.setBounds(0, 0, 1920, 1920);
+  game.add.tileSprite(0, 0, 1920, 1920, 'background');
+  game.world.setBounds(0, 0, 1920, 1920);
 
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+  game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
-    npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
+  player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+  npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
 
-    //game.physics.p2.enable(player);
-    game.physics.enable([player,npc], Phaser.Physics.ARCADE);
-    npc.body.immovable = true;
-    player.fixedRotation = true;
+  //game.physics.p2.enable(player);
+  game.physics.enable([player,npc], Phaser.Physics.ARCADE);
+  npc.body.immovable = true;
+  player.fixedRotation = true;
 
-    cursors = game.input.keyboard.createCursorKeys();
+  cursors = game.input.keyboard.createCursorKeys();
 
-    game.camera.follow(player);
-
-
-   var blurX = game.add.filter('BlurX');
-   var blurY = game.add.filter('BlurY');
-   var gray = game.add.filter('Gray');
+  game.camera.follow(player);
 
 
-    blurX.blur = 100;
-    blurY.blur = 1;
+  var blurX = game.add.filter('BlurX');
+  var blurY = game.add.filter('BlurY');
+  var gray = game.add.filter('Gray');
 
 
-	// logo.filters = [blurX, blurY, gray];
-    //  Here we create a group, populate it with sprites, give them all a random velocity
-    //  and then check the group against itself for collision
+  blurX.blur = 100;
+  blurY.blur = 1;
 
 
-
-    testImage = new MonsterMystery.GameImage(game, 'phaser', game.world.centerX/2 + 300, game.world.centerY/2, gray);
-    // testImage.toggle();
-    // console.log(testImage);
-    // testImage.toggle();
+  // logo.filters = [blurX, blurY, gray];
+  //  Here we create a group, populate it with sprites, give them all a random velocity
+  //  and then check the group against itself for collision
 
 
 
-/*
-    for (var i = 0; i < 90; i++)
-    {
-        var s = sprites.create(game.rnd.integerInRange(100, 700), game.rnd.integerInRange(32, 200), 'spinner');
-        s.animations.add('spin', [0, 1, 2, 3]);
-        s.play('spin', 20, true);
-        s.body.velocity.set(game.rnd.integerInRange(-200, 200), game.rnd.integerInRange(-200, 200));
-    }
-
-    sprites.setAll('body.collideWorldBounds', true);
-    sprites.setAll('body.bounce.x', 1);
-    sprites.setAll('body.bounce.y', 1);
-
-  */
-
-  // text style for overlay
-  var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
-  //text2 = game.add.text(game.world.centerX - 40, game.world.centerY -50, "PRESS SPACE", style);
- //text2.anchor.set(0.5);
+  testImage = new MonsterMystery.GameImage(game, 'phaser', game.world.centerX/2 + 300, game.world.centerY/2, gray);
+  testImage2 = new MonsterMystery.GameImage(game, 'npc', game.world.centerX/4 + 300, game.world.centerY/4, gray);
+  testImage.toggle();
+  testImage2.toggle();
+  // testImage.toggle();
+  // console.log(testImage);
+  // testImage.toggle();
 
 
- spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+  /*
+  for (var i = 0; i < 90; i++)
+  {
+  var s = sprites.create(game.rnd.integerInRange(100, 700), game.rnd.integerInRange(32, 200), 'spinner');
+  s.animations.add('spin', [0, 1, 2, 3]);
+  s.play('spin', 20, true);
+  s.body.velocity.set(game.rnd.integerInRange(-200, 200), game.rnd.integerInRange(-200, 200));
+}
+
+sprites.setAll('body.collideWorldBounds', true);
+sprites.setAll('body.bounce.x', 1);
+sprites.setAll('body.bounce.y', 1);
+
+*/
+
+// text style for overlay
+var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
+//text2 = game.add.text(game.world.centerX - 40, game.world.centerY -50, "PRESS SPACE", style);
+//text2.anchor.set(0.5);
+
+
+spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+
+//test for compareImages
+console.log(compareImages(testImage, testImage2));
 
 
 }
@@ -135,53 +143,53 @@ function create() {
 
 function update(){
 
-    //player.body.setZeroVelocity();
-    player.body.velocity.setTo(0, 0);
-    player.body.angularVelocity = 0;
+  //player.body.setZeroVelocity();
+  player.body.velocity.setTo(0, 0);
+  player.body.angularVelocity = 0;
 
-    game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-
-
-    if (cursors.up.isDown)
-    {
-        //player.body.moveUp(300)
-        player.body.velocity.y = -300;
-    }
-    else if (cursors.down.isDown)
-    {
-        //player.body.moveDown(300);
-        player.body.velocity.y = 300;
-    }
-
-    if (cursors.left.isDown)
-    {
-        player.body.velocity.x = -300;
-    }
-    else if (cursors.right.isDown)
-    {
-        //player.body.moveRight(300);
-        player.body.velocity.x = 300;
-    }
+  game.physics.arcade.collide(player, npc, collisionHandler, null, this);
 
 
-    if (spacebar.isDown)
-    {
-      consple.log('you pressed space');
-    }
+  if (cursors.up.isDown)
+  {
+    //player.body.moveUp(300)
+    player.body.velocity.y = -300;
+  }
+  else if (cursors.down.isDown)
+  {
+    //player.body.moveDown(300);
+    player.body.velocity.y = 300;
+  }
+
+  if (cursors.left.isDown)
+  {
+    player.body.velocity.x = -300;
+  }
+  else if (cursors.right.isDown)
+  {
+    //player.body.moveRight(300);
+    player.body.velocity.x = 300;
+  }
+
+
+  if (spacebar.isDown)
+  {
+    consple.log('you pressed space');
+  }
 
 
 }
 
 function collisionHandler (obj1, obj2) {
-    console.log("collision handler!");
-    player.tint = 0xdd0c39;
-    npc.tint = 0xdd0c39;
+  console.log("collision handler!");
+  player.tint = 0xdd0c39;
+  npc.tint = 0xdd0c39;
 
-    if(createTextFlag === false){
+  if(createTextFlag === false){
     createText();
-    }
+  }
 
-    //console.log(player.x);
+  //console.log(player.x);
 }
 
 function render() {
@@ -198,47 +206,47 @@ function listener(){
 
 function createText() {
 
-    textBG = game.add.sprite(player.x, player.y, 'pic');
-    textBG.scale.setTo(.8, .8);
-    textBG.x = textBG.x - textBG.width/2;
-    textBG.y = textBG.y - textBG.height/2;
+  textBG = game.add.sprite(player.x, player.y, 'pic');
+  textBG.scale.setTo(.8, .8);
+  textBG.x = textBG.x - textBG.width/2;
+  textBG.y = textBG.y - textBG.height/2;
 
-    textBG.alpha = .8;
+  textBG.alpha = .8;
 
-    //game.add.tween(textBG).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
-
-
-
-    //roundRect = new Phaser.Graphics.drawRoundedRect(game.world.centerX, game.world.centerY, 500, 300, 5)
-    text = game.add.text(player.x, player.y, '');
-
-    text.anchor.setTo(0.5);
+  //game.add.tween(textBG).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
 
 
 
-    text.font = 'Coming Soon';
-    text.fontSize = 30;
-    text.backgroundColor = '#ffff00';
+  //roundRect = new Phaser.Graphics.drawRoundedRect(game.world.centerX, game.world.centerY, 500, 300, 5)
+  text = game.add.text(player.x, player.y, '');
 
-    //  x0, y0 - x1, y1
-    //grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
-    //grd.addColorStop(0, '#8ED6FF');
-    //grd.addColorStop(1, '#004CB3');
-    text.fill = '#FFFFFF';
-
-    text.align = 'center';
-    text.stroke = '#000000';
-    text.strokeThickness = 2;
-    text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5);
-    text.wordWrap = true;
-    text.wordWrapWidth = 500;
+  text.anchor.setTo(0.5);
 
 
-    //text.inputEnabled = true;
 
-    nextLine();
-    createTextFlag = true;
-    game.input.onDown.addOnce(removeText, this);
+  text.font = 'Coming Soon';
+  text.fontSize = 30;
+  text.backgroundColor = '#ffff00';
+
+  //  x0, y0 - x1, y1
+  //grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
+  //grd.addColorStop(0, '#8ED6FF');
+  //grd.addColorStop(1, '#004CB3');
+  text.fill = '#FFFFFF';
+
+  text.align = 'center';
+  text.stroke = '#000000';
+  text.strokeThickness = 2;
+  text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5);
+  text.wordWrap = true;
+  text.wordWrapWidth = 500;
+
+
+  //text.inputEnabled = true;
+
+  nextLine();
+  createTextFlag = true;
+  game.input.onDown.addOnce(removeText, this);
 
 }
 
@@ -247,7 +255,7 @@ function createText() {
 function removeText() {
   textBG.destroy();
   textBG.alpha = 0;
-    text.destroy();
+  text.destroy();
 }
 
 function updateText(){
@@ -259,42 +267,86 @@ function updateText(){
 
 function nextLine() {
 
-    if (lineIndex === content.length)
-    {
-        //  We're finished
-        return;
-    }
+  if (lineIndex === content.length)
+  {
+    //  We're finished
+    return;
+  }
 
-    //  Split the current line on spaces, so one word per array element
-    line = content[lineIndex].split(' ');
+  //  Split the current line on spaces, so one word per array element
+  line = content[lineIndex].split(' ');
 
-    //  Reset the word index to zero (the first word in the line)
-    wordIndex = 0;
+  //  Reset the word index to zero (the first word in the line)
+  wordIndex = 0;
 
-    //  Call the 'nextWord' function once for each word in the line (line.length)
-    game.time.events.repeat(wordDelay, line.length, nextWord, this);
+  //  Call the 'nextWord' function once for each word in the line (line.length)
+  game.time.events.repeat(wordDelay, line.length, nextWord, this);
 
-    //  Advance to the next line
-    lineIndex++;
+  //  Advance to the next line
+  lineIndex++;
 
 }
 
 function nextWord() {
 
-    //  Add the next word onto the text string, followed by a space
-    text.text = text.text.concat(line[wordIndex] + " ");
+  //  Add the next word onto the text string, followed by a space
+  text.text = text.text.concat(line[wordIndex] + " ");
 
-    //  Advance the word index to the next word in the line
-    wordIndex++;
+  //  Advance the word index to the next word in the line
+  wordIndex++;
 
-    //  Last word?
-    if (wordIndex === line.length)
-    {
-        //  Add a carriage return
-        text.text = text.text.concat("\n");
+  //  Last word?
+  if (wordIndex === line.length)
+  {
+    //  Add a carriage return
+    text.text = text.text.concat("\n");
 
-        //  Get the next line after the lineDelay amount of ms has elapsed
-        game.time.events.add(lineDelay, nextLine, this);
+    //  Get the next line after the lineDelay amount of ms has elapsed
+    game.time.events.add(lineDelay, nextLine, this);
+  }
+
+}
+
+//method to compare if two images are filtered the same way
+function compareImages(firstImage, secondImage){
+  console.log("compare images");
+  console.log(firstImage);
+  console.log(secondImage);
+
+  //test for array comparisons
+  var arr1 = firstImage.filters;
+  var arr2 = secondImage.filters;
+
+  if (firstImage.key != secondImage.key){
+    return false;
+  }
+
+  //neither image is filtered
+  if (arr1 == null && arr2 == null){
+    return true;
+  }
+  else if (arr1 == null || arr2 == null){
+    return false;
+  }
+
+  if (arr1.length != arr2.length){
+    return false;
+  }
+
+  //if here, we know that they are both arrays so we can sort them
+  arr1 = arr1.sort();
+  arr2 = arr2.sort();
+
+
+
+  for (var i = arr1.length; i--;) {
+    if(arr1[i] != arr2[i]){
+      return false;
     }
+  }
+
+
+
+  return true;
 
 }
