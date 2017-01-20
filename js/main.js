@@ -1,6 +1,9 @@
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
+
+
+
 MonsterMystery = {
 
 }
@@ -15,7 +18,7 @@ WebFontConfig = { // load custom google fonts
 };
 
 //----------VARIABLES ---------------------//
-
+var w = 800; // game width;
 var text = null;
 var text2;
 var roundRect;
@@ -56,6 +59,7 @@ var testImage;
 var player;
 var npc;
 var cursors;
+var inBound;
 
 
 
@@ -126,6 +130,31 @@ function create() {
  game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 
 
+
+//--- START/RESTART
+
+restart_label = game.add.text(w - 100, 20, 'Restart', { font: '24px Arial', fill: '#fff' });
+   restart_label.inputEnabled = true;
+
+   restart_label.events.onInputUp.add(function () {
+       // When the paus button is pressed, we pause the game
+       //game.paused = true;
+
+       console.log('meow');
+
+       this.game.state.start(game); 
+
+       // Then add the menu
+      // menu = game.add.sprite(w/2, h/2, 'menu');
+      // menu.anchor.setTo(0.5, 0.5);
+
+
+   });
+
+restart_label.fixedToCamera = true;
+
+
+
 }
 
 
@@ -137,10 +166,11 @@ function update(){
     game.physics.arcade.collide(player, npc, collisionHandler, null, this);
 
 
+
     //Touch Based Movement
     //ActivePointer should be mouse OR finger, depending on device
 
-    if(createTextFlag == false){// if text box not up, move
+    if(createTextFlag == false){// if text box not up, move //&& inBound = true
       if (game.input.activePointer.isDown)
       {
           //  400 is the speed it will move towards the touch
@@ -194,7 +224,7 @@ function update(){
 }
 
 function collisionHandler (obj1, obj2) {
-    console.log("collision handler!");
+    //console.log("collision handler!");
     player.tint = 0xdd0c39;
     npc.tint = 0xdd0c39;
 
@@ -202,7 +232,7 @@ function collisionHandler (obj1, obj2) {
     createText();
     }
 
-    //console.log(player.x);
+
 }
 
 function render() {
@@ -322,5 +352,10 @@ function nextWord() {
         //  Get the next line after the lineDelay amount of ms has elapsed
         game.time.events.add(lineDelay, nextLine, this);
     }
+
+}
+
+function restart(){
+
 
 }
