@@ -15,8 +15,6 @@ var blurButton;
 var background;
 var filter;
 var sprite;
-var isFiltered;
-var style;
 var text;
 
 function create() {
@@ -82,56 +80,54 @@ function create() {
 
     game.stage.backgroundColor = '#182d3b';
 
-    // background = game.add.tileSprite(0, 0, 800, 600, 'background');
-
     sprite = game.add.sprite(0, 0, 'metal');
     blurFilter = new Phaser.Filter(game, null, blurShader);
     normalFilter = new Phaser.Filter(game, null, normalShader);
 
-    style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    //blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
 
-    // text = game.add.text(game.world.centerX, game.world.centerY, "- phaser -\nwith a sprinkle of\npixi dust", style);
-
-
-    blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
-
-
-    this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
-
-    isFiltered = false;
+    //this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
 
     sprite.filters = null;
-    console.log(sprite.filters);
-
-}
-
-function actionOnClick () {
-
-    // background.visible =! background.visible;
-    if (!isFiltered) {
-        sprite.filters = [ blurFilter ];
-
-        console.log(blurFilter);
-        isFiltered = true;
-    }
-    else {
-        sprite.filters = [ normalFilter ];
-        sprite.filters = null;
-        blurFilter.destroy();
-        console.log(sprite.filters);
-        console.log(blurFilter);
-        isFiltered = false;
-    }
-
-}
-
-function blurImage() {
     
+    var Dbutton;
+    Dbutton = new FilterButton(game, 500, 512, "emptyButton", "DANIELLE", blurFilter, Dbutton, 0, null, 2);
+
 }
 
-function doBtnStartHandler () {
 
+
+//FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
+var FilterButton = function(game, x, y, key, label, filter, overFrame, outFrame, downFrame, upFrame){
+    this.filter = filter;
+    //callbackContext is the FilterButton, not the LabelButton
+    this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
+};
+
+
+//applies a filter from a FilterButton to a GameImage (currently only applies one filter at a time)
+function applyFilter(image, button){
+    if(!image.isFiltered){
+        image.filters = [ button.filter ];
+        image.isFiltered = true;
+    }
+    else{
+        image.filters = [ normalFilter ];
+        image.filters = null;
+        button.filter.destroy();
+        //console.log(image.filters);
+        image.isFiltered = false;
+    }
 }
+
+
+//default callback for FilterButtons
+function filterOnClick(){
+    applyFilter(sprite, this);
+}
+
+
+
 
 function update() {
     sprite.filters.update()
