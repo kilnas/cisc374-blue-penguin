@@ -47,7 +47,6 @@ function create() {
     testImage.toggle();
 
 
-
 /*
     for (var i = 0; i < 90; i++)
     {
