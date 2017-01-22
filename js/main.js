@@ -4,6 +4,8 @@ var mainState = {
   create: function(){
     // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
     // logo.anchor.setTo(0.5, 0.5);
+      
+    var progress = 0;
 
     music = game.add.audio('noir1');
     music.play();
