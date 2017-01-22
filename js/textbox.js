@@ -1,14 +1,4 @@
 
-var line = [];
-var wordIndex = 0;
-var lineIndex = 0;
-
-var wordDelay = 120;
-var lineDelay = 400;
-
-
-
-
 
 var Textbox = function(x, y, messageArray){
   this.x = game.camera.width / 2;
@@ -56,11 +46,13 @@ var Textbox = function(x, y, messageArray){
 
 
   this.removeText = function(){
-
-    //this.textBG.destroy();
-    this.textBG.alpha = 0;
+    console.log('removerlaksjl');
+    if(!(typeof textBG === "undefined")){
+      //this.textBG.destroy();
+      this.textBG.alpha = 0;
       this.text.alpha = 0; //destroy();
       createTextFlag = false;
+    }
   }
 
 

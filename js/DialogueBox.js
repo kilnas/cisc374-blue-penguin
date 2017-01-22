@@ -11,7 +11,6 @@ var lineDelay = 400;
 
 
 var DialogueBox = function(x, y, messageArray){
-  console.log('diaglogue box');
   this.x = game.camera.width / 2;
   this.y = game.camera.height / 2;
   this.content = messageArray;

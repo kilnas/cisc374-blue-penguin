@@ -13,18 +13,26 @@ var mainState = {
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
-      player = game.add.sprite(50, game.world.centerY, 'player');
+      player = game.add.sprite(50, game.world.centerY, 'kiwi');
       startingGame = false;
     }
     else{
       //if persisting data put it in here
-      player = game.add.sprite(playerX, playerY, 'player');
+      player = game.add.sprite(playerX, playerY, 'kiwi');
+
     }
 
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
+    turtle = new Turtle(80, 60, game, 'turtle', content);
 
-    turtle = new Turtle(90, 500, game, 'turtle', content);
+      if(!foundPerson){
+          turtle.visible = false;
+      }
+      else{
+          turtle.visible = true;
+      }
+
 
 
     introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);

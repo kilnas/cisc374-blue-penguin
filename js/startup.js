@@ -20,6 +20,7 @@ var playerX;
 var playerY;
 var startingGame = true;
 var foundPerson = false;
+var solvedTurtle = false;
 //var grd;
 
 content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z z z z z zz zzzz zzzz zzzz zzzz zzzzz", 'you found a key', "orange peels"];
@@ -54,7 +55,8 @@ var onProblem;
 //-----------------HELPER FUNCTIONS---------------//
 function collisionHandler (obj1, obj2) {
 
-  player.tint = 0xdd0c39;
+    if(foundPerson){
+    player.tint = 0xdd0c39;
 
   //if(createTextFlag === false){
     //createText();
@@ -65,6 +67,10 @@ function collisionHandler (obj1, obj2) {
 
 
   obj2.hitTurtle();
+    }
+    else{
+        console.log("you havent talked to da person yet!");
+    }
 
   //console.log(player.x);
 }
@@ -77,8 +83,12 @@ function collidePerson(){
     if(!foundPerson){
         foundPerson = true;
         console.log("found sonic!");
+
         speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, intro);
         speech1.createText();
+
+        turtle.visible = true;
+
     }
 }
 
@@ -148,6 +158,7 @@ function displayImages(obj1, obj2) {
 game.state.add("Boot", bootState);
 game.state.add("Preload", preloadState);
 game.state.add("GameTitle", gameTitleState);
+game.state.add("Intro", introState);
 game.state.add("Main", mainState);
 game.state.add("Image", imageState);
 game.state.add("GameOver", gameOverState);

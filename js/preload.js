@@ -21,6 +21,7 @@ var preloadState = {
     game.load.audio('noir1', 'images/DancesandDames.mp3');
     game.load.image('wall','images/wall.jpg');
     game.load.image('turtle','images/turtle.png');
+    game.load.image('kiwi', 'images/detective_sprite.png');
   },
 
   //sends us to the main menu
