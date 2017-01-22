@@ -15,8 +15,7 @@ var DialogueBox = function(x, y, messageArray){
   this.y = game.camera.height / 2;
   this.content = messageArray;
   this.isShowing = false;
-  console.log(this.x);
-  console.log(this.y);
+
 
 
 
@@ -66,6 +65,7 @@ var DialogueBox = function(x, y, messageArray){
     this.textBG.alpha = 0;
       this.text.alpha = 0; //destroy();
       createDiaFlag = false;
+      console.log('remove dialog');
   }
 
 

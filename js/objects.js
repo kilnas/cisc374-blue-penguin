@@ -10,8 +10,6 @@ Turtle = function(x, y, game, sprite, message){
 
   this.enableBody = true;
   //this.body.moves = false;
-  console.log(this.x);
-  console.log(this.sprite);
   game.add.existing(this);
 
   this.hitTurtle = function(){
@@ -40,5 +38,5 @@ Wall.prototype = Object.create(Phaser.Sprite.prototype);
 Wall.prototype.constructor = Wall;
 
 Wall.prototype.update = function() {
-    console.log('woupd');
+    //console.log('woupd');
 };

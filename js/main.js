@@ -16,7 +16,7 @@ var mainState = {
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
-      player = game.add.sprite(150, game.world.centerY, 'kiwi');
+      player = game.add.sprite(game.world.centerX, game.world._height - 200, 'kiwi');
       startingGame = false;
       turtle.visible = false;
       foundPerson = false;
@@ -75,58 +75,58 @@ var mainState = {
     //var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
 
     var level = [
-     'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-     'x                                                       x',
-     'x                                                    x',
-     'x                                                x',
-     'x                                             x',
-     'x              x                               x',
-     'x              x                              x',
-     'x              x                                 x',
-     '            x              x                    x',
-     '       x              x                                x',
-     '           x              x                                x',
-     '             x              x                                x',
-     '                                         x              x',
-     '                          x              x          x',
-     'x                                                        x',
-     'x                                                        x',
-     'x                                                        x',
-     'x                                                       x',
-     'x                                                        x',
-     'x                                                       x',
-     'x                                                       x',
-     'x                                                       x',
-     'x                                                      x',
-     'x                                                      x',
-     'x                                                       x',
-     'x                                                     x',
-     'x                                                   x',
-     'x                                               x',
+     'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+     'x              x                                      x',
+     'x              x                                      x',
+     'x              x                                      x',
+     'x              x       x                              x',
+     'x                      x                           xxxx',
+     'x                      x                x          x',
+     'x                      x                x          x',
+     'xxxxxxxxxxxxxxxxxxxxxxxx                x          x',
+     '                                        x          x',
+     '                                        x          x',
+     '                                        x          x',
+     '                                        x          x',
+     '                                        x          x',
+     'x      xxxxxx          xxx    xxx       xxxxxxxxxxxx',
+     'x         x            xxxx  xxxx                 x',
+     'x         x             xxxxxxxx                  x',
+     'x         x              xxxxxx                   x',
+     'x      xxxxxx              xx                     x',
      'x                                                 x',
      'x                                                 x',
      'x                                                 x',
-     'x                                                  x',
-     'x                                                  x',
-     'x                                                 x',
-     'x                                                   x',
-     'x                                               x',
-     'x                                                x',
-     'x                                               x',
-     'x                                               x',
-     'x                                             x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                            x',
-     'x                                                  x',
-     'x                                                   x',
-     'x                                                  x',
-     'xxx           xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+     'x      xxxxxx  x   x  xxxx  xxxxx  x     xxxxxxx  x',
+     'x         x    x   x  x  x    x    x     x        x',
+     'x         x    x   x  x x     x    x     xxxxx    x',
+     'x         x     xxx   x  x    x    x     x        x',
+     'x         x                        xxxxx xxxxx    x',
+     'x         x                                       x',
+     'x         x                                       x',
+     'x         x                                       x',
+     'x         x                                       x',
+     'x         xxxxxxxxxxxxxx      xxxxxxxxxxxxxxxxxxxxx',
+     'x         x            x      x                    ',
+     'x         x            x      x                    ',
+     'x         x            x      x           x        ',
+     'x         xxxxxxx      x      x           x       x',
+     'x         x                   x           x       x',
+     'x         x                   xxxxxxxxxxxxx       x',
+     'x         x                               x       x',
+     'x         x                               x       x',
+     'x       xxxxxxxxxxxxxxxx     xxxxxxxx     x       x',
+     'x       x                    x            x       x',
+     'x       x                    x            x       x',
+     'x       x                    x            x       x',
+     'x       x                    x            x       x',
+     'x       x      xxxxxxxxx     x            x       x',
+     'x                      x     x            x       x',
+     'x                      x     xxxxxxxxxxxxxx       x',
+     'x                      x                          x',
+     'x                      x                          x',
+     'x                      x                          x',
+     'xxxxxxxxxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxxxxxxxxx',
  ];
 
  for (var i = 0; i < level.length; i++) {
@@ -143,6 +143,24 @@ var mainState = {
 
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+    game.input.onTap.add(onTap, this);
+
+
+    function onTap(pointer, doubleTap) {
+    if (doubleTap)
+    {
+        //  They double-tapped, so swap the image
+        if(createDiaFlag == true){
+          console.log('ppppppppppp');
+          speech1.removeText();
+        }
+    }
+    else
+    {
+
+    }
+
+  }
 
 
 
@@ -199,20 +217,20 @@ var mainState = {
       game.physics.arcade.collide(player, wallGroup, collisionHandler2, null, this);
 
 
-      if (cursors.up.isDown)
-      {
-        //player.body.moveUp(300)
-        player.body.velocity.y = -300;
-      }
-      else if (cursors.down.isDown)
-      {
-        //player.body.moveDown(300);
-        player.body.velocity.y = 300;
-      }
+      // if (cursors.up.isDown)
+      // {
+      //   //player.body.moveUp(300)
+      //   player.body.velocity.y = -300;
+      // }
+      // else if (cursors.down.isDown)
+      // {
+      //   //player.body.moveDown(300);
+      //   player.body.velocity.y = 300;
+      // }
         //Touch Based Movement
         //ActivePointer should be mouse OR finger, depending on device
 
-      if(createTextFlag == false){// if text box not up, move
+      if(createDiaFlag == false){// if text box not up, move //createTextFlag == false ||
         if (game.input.activePointer.isDown)
         {
             //  400 is the speed it will move towards the touch
@@ -228,11 +246,30 @@ var mainState = {
         {
             player.body.velocity.setTo(0, 0);
         }
+    }else if(createDiaFlag == true){
+
+      if(game.input.activePointer.isDown){
+
+          //speech1.removeText();
+          console.log('hallowe');
+
+      }
+
+    }else{
     }
+
+
+
+
 
 
     if (spacebar.isDown)
       {
+
+        //speech1.removeText();
+        //turtleText.removeText();
+        console.log(createDiaFlag);
+        console.log(createTextFlag);
 
         //turtleText.removeText();
         //speech1.removeText();
@@ -242,7 +279,10 @@ var mainState = {
       }
 
 
-      
+
+
+
+
 
   },
 

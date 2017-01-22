@@ -14,6 +14,7 @@ var roundRect;
 var spacebar;
 
 var createTextFlag = false;
+var createDiaFlag = false;
 var menuTextGroup;
 var gameOverTextGroup;
 var playerX;
@@ -27,7 +28,7 @@ content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z
 var intro = ['It has been 10 years since you have lost Powder, your pet turtle. Recently a string of turdel disappearances has occurred. You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion. Unfortuneatly all the wanted pictures of missing turtuls are all distorted. It is up to you to match the tertols you find to their rightful owners.'];
 var intro2 = ['It has been 10 years since you have lost Powder, your pet turtle.', "Recently a string of turdel disappearances has occured.", 'You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion.', "Unfortuneatly all the wanted pictures of missing turtuls are all distorted.", 'It is up to you to match the tertols you find to their rightful owners'];
 
-var sonictalk = ['HEY HAVE YOU SEEN MY MISSING TURTLE. I SAW TSOME TURNTLES. HELP.'];
+var sonictalk = ['HEY! Have you seen my missing turtle!?! I have not seen him in a week. I am not the only one either. Everyone I know has lost their turtles. Unfortunately all of their pictures in their missing turtle posters are messed up by some evil force.', 'HMM. There are a lot of turtles in this place. Take some missing turtle flyers. Tap twice to stop me from talking.'];
 
 
 
@@ -79,7 +80,7 @@ function collisionHandler (obj1, obj2) {
 }
 
 function collisionHandler2 (obj1, obj2) {
-  console.log('wall hit');
+  //console.log('wall hit');
 }
 
 function collidePerson(obj1, obj2){
