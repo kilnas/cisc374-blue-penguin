@@ -256,6 +256,7 @@ function displayImages(obj1, obj2) {
 game.state.add("Boot", bootState);
 game.state.add("Preload", preloadState);
 game.state.add("GameTitle", gameTitleState);
+game.state.add("Intro", introState);
 game.state.add("Main", mainState);
 game.state.add("Image", imageState);
 game.state.add("GameOver", gameOverState);

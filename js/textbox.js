@@ -1,14 +1,4 @@
 
-var line = [];
-var wordIndex = 0;
-var lineIndex = 0;
-
-var wordDelay = 120;
-var lineDelay = 400;
-
-
-
-
 
 var Textbox = function(x, y, messageArray){
   this.x = game.camera.width / 2;

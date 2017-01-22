@@ -26,7 +26,7 @@ var gameTitleState = {
   },
 
   start: function(){
-    game.state.start('Main');
+    game.state.start('Intro');
   }
 
 }
