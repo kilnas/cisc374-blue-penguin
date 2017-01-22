@@ -2,7 +2,7 @@ var mainState = {
 
   //place all the objects in the world
   create: function(){
-      
+
     music = game.add.audio('noir1');
     music.play();
 
@@ -24,12 +24,12 @@ var mainState = {
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
 
-    turtle = new Turtle(80, 40, game, 'turtle', content);
-    
+    turtle = new Turtle(90, 500, game, 'turtle', content);
+
 
     introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);
     turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, content);
-    speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, intro);
+
 
     game.physics.enable([player,testSprite], Phaser.Physics.ARCADE);
     testSprite.body.immovable = true;
@@ -232,7 +232,7 @@ var mainState = {
     if (spacebar.isDown)
       {
 
-        turtleText.removeText();
+        //turtleText.removeText();
         //test code for win state
         //TODO remove next line
         this.win();
