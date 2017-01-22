@@ -7,6 +7,9 @@ var imageState = {
     var startLabel = game.add.text(80, 520,
                     "press the W key to go to game", {font: "25px Arial", fill: "#ffffff" });
 
+    var puzzle = new filterClass(game, 'turtlePic1');
+    puzzle.setup();
+
     //ensure text will be on top
     /*
     menuTextGroup = game.add.group();
@@ -29,7 +32,8 @@ var imageState = {
   },
 
   toGame: function(){
-    game.state.start('Main');
+    game.state.start('GameOver');
+    console.log('hello');
   }
 
 }

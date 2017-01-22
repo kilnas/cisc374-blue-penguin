@@ -11,20 +11,27 @@ var mainState = {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
+
+    turtle = new Turtle(80, 60, game, 'turtle', content);
+
     //logic to get correct player position if coming from imageState
     if(startingGame){
-      player = game.add.sprite(50, game.world.centerY, 'kiwi');
+      player = game.add.sprite(150, game.world.centerY, 'kiwi');
       startingGame = false;
+      turtle.visible = false;
+      foundPerson = false;
+      completedPuzzle1 = false;
     }
     else{
       //if persisting data put it in here
       player = game.add.sprite(playerX, playerY, 'kiwi');
+
     
     }
-
+    createTextFlag = false;
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
-    turtle = new Turtle(80, 60, game, 'turtle', content);
+    
       
       if(!foundPerson){
           turtle.visible = false;
@@ -63,19 +70,6 @@ var mainState = {
     //  Here we create a group, populate it with sprites, give them all a random velocity
     //  and then check the group against itself for collision
 
-
-
-    testImage = new MonsterMystery.GameImage(game, 'phaser', game.world.centerX/2 + 300, game.world.centerY/2, gray);
-    testImage2 = new MonsterMystery.GameImage(game, 'npc', game.world.centerX/4 + 300, game.world.centerY/4, gray);
-    testImage.toggle();
-    testImage2.toggle();
-
-    game.physics.enable([testImage2], Phaser.Physics.ARCADE);
-    // testImage.toggle();
-    // console.log(testImage);
-    // testImage.toggle();
-
-    onProblem = false;
 
 
     //var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
@@ -200,7 +194,8 @@ var mainState = {
       game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
 
-      game.physics.arcade.collide(player, turtle, collisionHandler, null, this);
+      // game.physics.arcade.collide(player, turtle, collisionHandler, null, this);
+      game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
       game.physics.arcade.collide(player, wallGroup, collisionHandler2, null, this);
 
 
@@ -259,9 +254,11 @@ var mainState = {
   },
 
   stateChangeCollision: function(obj1, obj2){
-    playerX = obj1.body.center.x;
-    playerY = obj2.body.center.y;
-    game.state.start('Image');
+    if (!completedPuzzle1) {
+        playerX = obj1.body.center.x;
+        playerY = obj2.body.center.y;
+        game.state.start('Image');
+    }
   }
 
 }

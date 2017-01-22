@@ -13,6 +13,12 @@ var gameOverState = {
     var menuLabel = game.add.text(80, 440,
                     "press the X key to go to the main menu", { font: "25px Arial", fill: "#ffffff" });
 
+    var againButton = new LabelButton(game, game.math.roundTo(game.width/2), game.math.roundTo(game.height/2), "emptyButton", "W", this.start, againButton);
+    againButton.scale.setTo(2.0, 2.0);
+
+    var menuButton = new LabelButton(game, game.math.roundTo(game.width/2), game.math.roundTo(game.height/2) - 100, "emptyButton", "X", this.menu, menuButton);
+    menuButton.scale.setTo(2.0, 2.0);
+
     //ensure group is on top
     /*
     gameOverTextGroup = game.add.group();

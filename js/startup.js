@@ -53,8 +53,8 @@ var ufo;
 var turtleText;
 var speech1;
 
-var problem;
-var onProblem;
+var puzzle;
+var completedPuzzle1 = false;
 
 
 //-----------------HELPER FUNCTIONS---------------//
@@ -67,8 +67,8 @@ function collisionHandler (obj1, obj2) {
     //createText();
   //}
 
-  turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, obj2.message);
-  turtleText.createText();
+  // turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, obj2.message);
+  // turtleText.createText();
 
 
   obj2.hitTurtle();
@@ -84,11 +84,13 @@ function collisionHandler2 (obj1, obj2) {
   console.log('wall hit');
 }
 
-function collidePerson(){
+function collidePerson(obj1, obj2){
     if(!foundPerson){
         foundPerson = true;
         console.log("found sonic!");
         turtle.visible = true;
+        // turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, obj2.message);
+        // turtleText.createText();
     }
 }
 
@@ -256,11 +258,11 @@ function compareImages(firstImage, secondImage){
 }
 
 
+
 function displayImages(obj1, obj2) {
-    if (problem == null) {
-        problem = new filterClass(game, 'turtlePic1');
-        problem.setup();
-        onProblem = true;
+    if (puzzle == null) {
+        puzzle = new filterClass(game, 'turtlePic1');
+        puzzle.setup();
     }
 
 }
