@@ -43,11 +43,12 @@ var Textbox = function(x, y, messageArray){
 
   this.removeText = function(){
     console.log('removerlaksjl');
-
-    //this.textBG.destroy();
-    this.textBG.alpha = 0;
+    if(!(typeof textBG === "undefined")){
+      //this.textBG.destroy();
+      this.textBG.alpha = 0;
       this.text.alpha = 0; //destroy();
       createTextFlag = false;
+    }
   }
 
 
