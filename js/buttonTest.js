@@ -7,6 +7,7 @@ function preload() {
     game.load.spritesheet('emptyButton', 'assets/buttons/flixel-button.png', 80, 20);
     game.load.image('background','assets/misc/starfield.jpg');
     game.load.image('metal', 'assets/textures/metal.png');
+    game.load.image('turtle', 'assets/turtles/turtle_1.jpg');
 
 
 }
@@ -15,9 +16,11 @@ var blurButton;
 var background;
 var filter;
 var sprite;
-var isFiltered;
-var style;
+var filteredSprite;
 var text;
+
+var cleanImage;
+var filterImage;
 
 function create() {
 
@@ -82,57 +85,114 @@ function create() {
 
     game.stage.backgroundColor = '#182d3b';
 
-    // background = game.add.tileSprite(0, 0, 800, 600, 'background');
+    //sprite = game.add.sprite(0, 0, 'metal');
+    
+    // sprite = game.add.sprite(0, 0, 'turtle');
+    // sprite.scale.setTo(0.5, 0.5);
 
-    sprite = game.add.sprite(0, 0, 'metal');
     blurFilter = new Phaser.Filter(game, null, blurShader);
     normalFilter = new Phaser.Filter(game, null, normalShader);
+    
+    // filteredSprite = game.add.sprite(300, 0, 'turtle');
+    // filteredSprite.scale.setTo(0.5, 0.5);
+    // applyFilter(filteredSprite, blurFilter);
 
-    style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    // sprite.filters = null;
 
-    // text = game.add.text(game.world.centerX, game.world.centerY, "- phaser -\nwith a sprinkle of\npixi dust", style);
+    setupImages(game, 'turtle', blurFilter);
+    
+    
+    var Dbutton;
+    Dbutton = new FilterButton(game, game.math.roundTo(game.width/2), 312, "emptyButton", "BLUR", blurFilter, Dbutton);
+    Dbutton.button.scale.setTo(2,2);
+
+    var undoButton;
+    undoButton = new LabelButton(game, game.math.roundTo(game.width/2), 380, "emptyButton", "UNDO", undoOnClick, undoButton);
+    undoButton.scale.setTo(2,2);
 
 
-    blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
+    //blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
 
-
-    this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
-
-    isFiltered = false;
-
-    sprite.filters = null;
-    console.log(sprite.filters);
+    //this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
 
 }
 
-function actionOnClick () {
 
-    // background.visible =! background.visible;
-    if (!isFiltered) {
-        sprite.filters = [ blurFilter ];
 
-        console.log(blurFilter);
-        isFiltered = true;
+//FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
+var FilterButton = function(game, x, y, key, label, filter, overFrame, outFrame, downFrame, upFrame){
+    this.filter = filter;
+    //note: callbackContext is the FilterButton instance, not the LabelButton
+    this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
+    
+};
+
+
+//applies a filter from a FilterButton to an image (currently only applies one filter at a time)
+function applyFilter(image, newFilter){
+    //toggle on
+    if(!image.isFiltered){
+        image.filters = [ newFilter ];
+        image.isFiltered = true;
+    }
+    
+    //toggle off
+    else{
+        image.filters = null;
+        image.isFiltered = false;
+        
+    }
+}
+
+function setupImages(game, imageKey, filters) {
+    cleanImage = game.add.sprite(0, 0, imageKey);
+    cleanImage.scale.setTo(0.5, 0.5);
+    filterImage = game.add.sprite(game.world.centerX + 200, 0, imageKey);
+    filterImage.scale.setTo(0.5, 0.5);
+    filterImage.x = game.world.width - filterImage.width;
+    applyFilter(filterImage, filters);
+}
+
+function pushFilter(image, filter) {
+    if (image.filters == null) {
+        image.filters = [ filter ];
     }
     else {
-        sprite.filters = [ normalFilter ];
-        sprite.filters = null;
-        blurFilter.destroy();
-        console.log(sprite.filters);
-        console.log(blurFilter);
-        isFiltered = false;
+        image.filters.push(filter);
+        image.filters = image.filters;
+        console.log(image.filters);
     }
-
 }
 
-function blurImage() {
+function popFilter(image) {
+    if (image.filters != null) {
+        if (image.filters.length <= 1) {
+            image.filters = null;
+        }
+        else {
+            image.filters.pop(image);
+            image.filters = image.filters;
+        }
+    }
     
 }
 
-function doBtnStartHandler () {
 
+//default callback for FilterButtons
+function filterOnClick(){
+    // applyFilter(cleanImage, this.filter);
+    pushFilter(cleanImage, this.filter);
+    this.button.frame = this.button.frame == 2 ? 0 : 2;
 }
 
+function undoOnClick() {
+    popFilter(cleanImage);
+    this.frame = this.frame == 2 ? 0 : 2;
+}
+
+
+
+
 function update() {
-    sprite.filters.update()
+    // cleanImage.filters.update()
 }
