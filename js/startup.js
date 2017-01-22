@@ -220,7 +220,7 @@ function compareImages(firstImage, secondImage){
 
 }
 
-/*
+
 function displayImages(obj1, obj2) {
     if (problem == null) {
         problem = new filterClass(game, 'turtle');
@@ -229,7 +229,7 @@ function displayImages(obj1, obj2) {
     }
 
 }
-*/
+
 
 //-----------STATES-----------------//
 
