@@ -10,7 +10,7 @@ var lineDelay = 400;
 
 
 
-var Textbox = function(x, y, messageArray){
+var DialogueBox = function(x, y, messageArray){
   this.x = game.camera.width / 2;
   this.y = game.camera.height / 2;
   this.content = messageArray;
