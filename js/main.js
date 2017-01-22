@@ -102,7 +102,7 @@ var mainState = {
       player.body.angularVelocity = 0;
 
       game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-      game.physics.arcade.collide(player, testSprite, displayImages, null, this);
+      //game.physics.arcade.collide(player, testSprite, displayImages, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
 
 
