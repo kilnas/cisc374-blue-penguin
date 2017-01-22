@@ -23,8 +23,7 @@ var mainState = {
     npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
-    //game.physics.p2.enable(player);
-    game.physics.enable([player,npc, testSprite], Phaser.Physics.ARCADE);
+    game.physics.enable([player,npc,testSprite], Phaser.Physics.ARCADE);
     npc.body.immovable = true;
     testSprite.body.immovable = true;
     player.fixedRotation = true;
@@ -32,7 +31,6 @@ var mainState = {
     cursors = game.input.keyboard.createCursorKeys();
 
     game.camera.follow(player);
-
 
     var blurX = game.add.filter('BlurX');
     var blurY = game.add.filter('BlurY');
@@ -61,47 +59,28 @@ var mainState = {
 
     onProblem = false;
 
-    /*
-    for (var i = 0; i < 90; i++)
-    {
-    var s = sprites.create(game.rnd.integerInRange(100, 700), game.rnd.integerInRange(32, 200), 'spinner');
-    s.animations.add('spin', [0, 1, 2, 3]);
-    s.play('spin', 20, true);
-    s.body.velocity.set(game.rnd.integerInRange(-200, 200), game.rnd.integerInRange(-200, 200));
-    }
 
-    sprites.setAll('body.collideWorldBounds', true);
-    sprites.setAll('body.bounce.x', 1);
-    sprites.setAll('body.bounce.y', 1);
-
-    */
-
-    // text style for overlay
     var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
-    //text2 = game.add.text(game.world.centerX - 40, game.world.centerY -50, "PRESS SPACE", style);
-    //text2.anchor.set(0.5);
+
+
+    spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 
 
 
+    //--- START/RESTART
 
-      spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-      game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+    restart_label = game.add.text(w - 100, 20, 'Restart', { font: '24px Arial', fill: '#fff' });
+    restart_label.inputEnabled = true;
 
-
-      //restart button in game
-      restart_label = game.add.text(w - 100, 20, 'Restart', { font: '24px Arial', fill: '#fff' });
-      restart_label.inputEnabled = true;
-
-      restart_label.events.onInputUp.add(function () {
+    restart_label.events.onInputUp.add(function () {
        // When the paus button is pressed, we pause the game
        //game.paused = true;
 
        console.log('meow');
 
-       //show that we are restarting the game
        startingGame = true;
-
-       game.state.start("Main");
+       this.game.state.start("Main");
 
        // Then add the menu
       // menu = game.add.sprite(w/2, h/2, 'menu');
@@ -109,6 +88,7 @@ var mainState = {
 
 
     });
+
 
    restart_label.fixedToCamera = true;
 
@@ -122,7 +102,7 @@ var mainState = {
       player.body.angularVelocity = 0;
 
       game.physics.arcade.collide(player, npc, collisionHandler, null, this);
-       game.physics.arcade.collide(player, testSprite, displayImages, null, this);
+      game.physics.arcade.collide(player, testSprite, displayImages, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
 
 
@@ -158,32 +138,7 @@ var mainState = {
     }
 
 
-
-    /*
-    Arrow Key Movement (Old)
-      if (cursors.up.isDown)
-      {
-          //player.body.moveUp(300)
-          player.body.velocity.y = -300;
-      }
-      else if (cursors.down.isDown)
-      {
-          //player.body.moveDown(300);
-          player.body.velocity.y = 300;
-      }
-
-      if (cursors.left.isDown)
-      {
-          player.body.velocity.x = -300;
-      }
-      else if (cursors.right.isDown)
-      {
-          //player.body.moveRight(300);
-          player.body.velocity.x = 300;
-      }*/
-
-
-      if (spacebar.isDown)
+    if (spacebar.isDown)
       {
         removeText();
         //test code for win state
