@@ -5,6 +5,9 @@ var mainState = {
     // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
     // logo.anchor.setTo(0.5, 0.5);
 
+    music = game.add.audio('noir1');
+    music.play();
+
     game.add.tileSprite(0, 0, 1920, 1920, 'background');
     game.world.setBounds(0, 0, 1920, 1920);
 
@@ -12,7 +15,7 @@ var mainState = {
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
-      player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+      player = game.add.sprite(50, game.world.centerY, 'player');
       startingGame = false;
     }
     else{
@@ -20,11 +23,17 @@ var mainState = {
       player = game.add.sprite(playerX, playerY, 'player');
     }
 
-    npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
+    //npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
-    game.physics.enable([player,npc,testSprite], Phaser.Physics.ARCADE);
-    npc.body.immovable = true;
+
+    turtle = new Turtle(80, 40, game, 'turtle', content);
+
+    introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);
+    turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, content);
+
+    game.physics.enable([player,testSprite], Phaser.Physics.ARCADE);
+    //npc.body.immovable = true;
     testSprite.body.immovable = true;
     player.fixedRotation = true;
 
@@ -39,6 +48,10 @@ var mainState = {
 
     blurX.blur = 100;
     blurY.blur = 1;
+
+    game.physics.enable([turtle], Phaser.Physics.ARCADE);
+    turtle.body.immovable = true;
+    wallGroup = game.add.physicsGroup();
 
 
     // logo.filters = [blurX, blurY, gray];
@@ -60,8 +73,74 @@ var mainState = {
     onProblem = false;
 
 
-    var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
+    //var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
 
+    var level = [
+     'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+     'x                                                       x',
+     'x                                                    x',
+     'x                                                x',
+     'x                                             x',
+     'x              x                               x',
+     'x              x                              x',
+     'x              x                                 x',
+     '            x              x                    x',
+     '       x              x                                x',
+     '           x              x                                x',
+     '             x              x                                x',
+     '                                         x              x',
+     '                          x              x          x',
+     'x                                                        x',
+     'x                                                        x',
+     'x                                                        x',
+     'x                                                       x',
+     'x                                                        x',
+     'x                                                       x',
+     'x                                                       x',
+     'x                                                       x',
+     'x                                                      x',
+     'x                                                      x',
+     'x                                                       x',
+     'x                                                     x',
+     'x                                                   x',
+     'x                                               x',
+     'x                                                 x',
+     'x                                                 x',
+     'x                                                 x',
+     'x                                                  x',
+     'x                                                  x',
+     'x                                                 x',
+     'x                                                   x',
+     'x                                               x',
+     'x                                                x',
+     'x                                               x',
+     'x                                               x',
+     'x                                             x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                            x',
+     'x                                                  x',
+     'x                                                   x',
+     'x                                                  x',
+     'xxx           xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+ ];
+
+ for (var i = 0; i < level.length; i++) {
+     for (var j = 0; j < level[i].length; j++) {
+
+         // Create a wall and add it to the 'walls' group
+         if (level[i][j] == 'x') {
+             var wall = game.add.sprite(32+32*j, 32+32*i, 'wall');
+             wallGroup.add(wall);
+             wall.body.immovable = true;
+         }
+       }
+     }
 
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
@@ -76,9 +155,6 @@ var mainState = {
     restart_label.events.onInputUp.add(function () {
        // When the paus button is pressed, we pause the game
        //game.paused = true;
-
-       console.log('meow');
-
        startingGame = true;
        this.game.state.start("Main");
 
@@ -92,6 +168,21 @@ var mainState = {
 
    restart_label.fixedToCamera = true;
 
+   //MUTE BUTTON LABEL
+   mute_label = game.add.text(w - 100, 40, 'Mute', { font: '20px Arial', fill: '#fff' });
+     mute_label.inputEnabled = true;
+     mute_label.fixedToCamera = true;
+
+   mute_label.events.onInputUp.add(function () {
+
+        if(music.mute == false){
+          music.mute = true;
+        }else{
+          music.mute = false;
+        }
+         //game.input.onDown.add(changeVolume, this);
+   });
+
     },
 
 
@@ -101,9 +192,11 @@ var mainState = {
       player.body.velocity.setTo(0, 0);
       player.body.angularVelocity = 0;
 
-      game.physics.arcade.collide(player, npc, collisionHandler, null, this);
       //game.physics.arcade.collide(player, testSprite, displayImages, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
+
+      game.physics.arcade.collide(player, turtle, collisionHandler, null, this);
+      game.physics.arcade.collide(player, wallGroup, collisionHandler2, null, this);
 
 
       if (cursors.up.isDown)
@@ -140,7 +233,8 @@ var mainState = {
 
     if (spacebar.isDown)
       {
-        removeText();
+
+        turtleText.removeText();
         //test code for win state
         //TODO remove next line
         this.win();
@@ -151,8 +245,8 @@ var mainState = {
 
   render: function(){
 
-    game.debug.cameraInfo(game.camera, 32, 32);
-    game.debug.spriteCoords(player, 32, 500);
+    //game.debug.cameraInfo(game.camera, 32, 32);
+    //game.debug.spriteCoords(player, 32, 500);
   },
 
   win: function(){

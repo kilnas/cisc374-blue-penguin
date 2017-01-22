@@ -35,17 +35,17 @@ MonsterMystery.GameImage.prototype.update = function() {
 MonsterMystery.GameImage.prototype.toggle = function(){
 
   if(this.filtered){
-    console.log("none");
+    //console.log("none");
     this.filtered = false;
     this.filters = null;
 
   }
   else{
-    console.log("gray");
+    //console.log("gray");
     this.filtered = true;
 
     this.filters = [ this.filter ];
-    console.log(this.filters);
+    //console.log(this.filters);
   }
 
 }

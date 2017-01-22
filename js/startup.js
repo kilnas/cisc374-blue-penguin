@@ -22,6 +22,9 @@ var startingGame = true;
 //var grd;
 
 content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z z z z z zz zzzz zzzz zzzz zzzz zzzzz", 'you found a key', "orange peels"];
+var intro = ['It has been 10 years since you have lost Powder, your pet turtle. Recently a string of turdel disappearances has occurred. You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion. Unfortuneatly all the wanted pictures of missing turtuls are all distorted. It is up to you to match the tertols you find to their rightful owners.'];
+var intro2 = ['It has been 10 years since you have lost Powder, your pet turtle.', "Recently a string of turdel disappearances has occured.", 'You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion.', "Unfortuneatly all the wanted pictures of missing turtuls are all distorted.", 'It is up to you to match the tertols you find to their rightful owners'];
+
 var line = [];
 var wordIndex = 0;
 var lineIndex = 0;
@@ -38,6 +41,14 @@ var player;
 var npc;
 var cursors;
 var inBound;
+var turtle;
+var introText;
+var music;
+var mute_label;
+var l;
+var wallGroup;
+var ufo;
+var turtleText;
 
 var problem;
 var onProblem;
@@ -45,15 +56,24 @@ var onProblem;
 
 //-----------------HELPER FUNCTIONS---------------//
 function collisionHandler (obj1, obj2) {
-  console.log("collision handler!");
-  player.tint = 0xdd0c39;
-  npc.tint = 0xdd0c39;
 
-  if(createTextFlag === false){
-    createText();
-  }
+  player.tint = 0xdd0c39;
+
+  //if(createTextFlag === false){
+    //createText();
+  //}
+
+  turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, obj2.message);
+  turtleText.createText();
+
+
+  obj2.hitTurtle();
 
   //console.log(player.x);
+}
+
+function collisionHandler2 (obj1, obj2) {
+  console.log('wall hit');
 }
 
 
@@ -223,7 +243,7 @@ function compareImages(firstImage, secondImage){
 
 function displayImages(obj1, obj2) {
     if (problem == null) {
-        problem = new filterClass(game, 'turtle');
+        problem = new filterClass(game, 'turtlePic1');
         problem.setup();
         onProblem = true;
     }
