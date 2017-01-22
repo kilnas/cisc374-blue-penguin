@@ -15,6 +15,10 @@ var DialogueBox = function(x, y, messageArray){
   this.y = game.camera.height / 2;
   this.content = messageArray;
   this.isShowing = false;
+  console.log(this.x);
+  console.log(this.y);
+
+
 
 
 
@@ -22,20 +26,23 @@ var DialogueBox = function(x, y, messageArray){
 
 
   this.createText = function(){ //newX, newY
+    console.log('crated dilogue boxe');
     //console.log(newX);
     //this.x = newX;
     //this.y = newY;
     // background overlay of text
     this.textBG = game.add.sprite(this.x, this.y, 'pic'); //player.x, player.y
-    this.textBG.scale.setTo(.8, .8);
+    this.textBG.scale.setTo(.8, .4);
     this.textBG.x = this.textBG.x - this.textBG.width/2;
-    this.textBG.y = this.textBG.y - this.textBG.height/2;
+    this.textBG.y = game.camera.height / 2; //this.textBG.y - this.textBG.height/6;
     this.textBG.alpha = .8;
+    this.textBG.fixedToCamera = true;
     //this.text = null;
     this.text = game.add.text(this.x, this.y, ''); //player.x, player.y
-    this.text.anchor.setTo(0.5);
+    this.text.anchor.setTo(0.5, 0);
+    this.text.y = game.camera.height/2; //this.textBG.y - this.textBG.height/2;
     this.text.font = 'Coming Soon';
-    this.text.fontSize = 25;
+    this.text.fontSize = 20;
     this.text.backgroundColor = '#ffff00';
     this.text.fill = '#FFFFFF';
     this.text.align = 'center';
@@ -44,10 +51,12 @@ var DialogueBox = function(x, y, messageArray){
     this.text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5);
     this.text.wordWrap = true;
     this.text.wordWrapWidth = 500;
+    this.text.fixedToCamera = true;
 
 
     this.nextLine();
-    createTextFlag = true;
+    createDiaFlag = true;
+
   }
 
 
@@ -56,7 +65,7 @@ var DialogueBox = function(x, y, messageArray){
     //this.textBG.destroy();
     this.textBG.alpha = 0;
       this.text.alpha = 0; //destroy();
-      createTextFlag = false;
+      createDiaFlag = false;
   }
 
 
@@ -95,4 +104,6 @@ var DialogueBox = function(x, y, messageArray){
           game.time.events.add(lineDelay, this.nextLine, this);
       }
   }
+
+  //game.input.onDown.addOnce(this.removeText(), this);
 }

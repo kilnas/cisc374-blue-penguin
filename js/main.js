@@ -2,7 +2,7 @@ var mainState = {
 
   //place all the objects in the world
   create: function(){
-      
+
     music = game.add.audio('noir1');
     music.play();
 
@@ -26,24 +26,24 @@ var mainState = {
       //if persisting data put it in here
       player = game.add.sprite(playerX, playerY, 'kiwi');
 
-    
+
     }
     createTextFlag = false;
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
-    
-      
+
       if(!foundPerson){
           turtle.visible = false;
       }
       else{
           turtle.visible = true;
       }
-    
+
+
 
     introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);
     turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, content);
-    speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, intro);
+
 
     game.physics.enable([player,testSprite], Phaser.Physics.ARCADE);
     testSprite.body.immovable = true;
@@ -234,10 +234,11 @@ var mainState = {
     if (spacebar.isDown)
       {
 
-        turtleText.removeText();
+        //turtleText.removeText();
+        //speech1.removeText();
         //test code for win state
         //TODO remove next line
-        this.win();
+        //this.win();
       }
 
   },
