@@ -241,9 +241,10 @@ var mainState = {
       {
 
         //turtleText.removeText();
+        //speech1.removeText();
         //test code for win state
         //TODO remove next line
-        this.win();
+        //this.win();
       }
 
   },

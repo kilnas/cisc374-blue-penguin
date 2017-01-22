@@ -27,6 +27,8 @@ content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z
 var intro = ['It has been 10 years since you have lost Powder, your pet turtle. Recently a string of turdel disappearances has occurred. You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion. Unfortuneatly all the wanted pictures of missing turtuls are all distorted. It is up to you to match the tertols you find to their rightful owners.'];
 var intro2 = ['It has been 10 years since you have lost Powder, your pet turtle.', "Recently a string of turdel disappearances has occured.", 'You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion.', "Unfortuneatly all the wanted pictures of missing turtuls are all distorted.", 'It is up to you to match the tertols you find to their rightful owners'];
 
+var sonictalk = ['HEY HAVE YOU SEEN MY MISSING TURTLE. I SAW TSOME TURNTLES. HELP.'];
+
 
 
 var sprites;
@@ -40,6 +42,7 @@ var cursors;
 var inBound;
 var turtle;
 var introText;
+
 var music;
 var mute_label;
 var l;
@@ -84,7 +87,7 @@ function collidePerson(){
         foundPerson = true;
         console.log("found sonic!");
 
-        speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, intro);
+        speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, sonictalk);
         speech1.createText();
 
         turtle.visible = true;
