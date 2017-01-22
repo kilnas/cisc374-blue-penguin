@@ -29,6 +29,7 @@ var mainState = {
 
     introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);
     turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, content);
+    speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, intro);
 
     game.physics.enable([player,testSprite], Phaser.Physics.ARCADE);
     testSprite.body.immovable = true;

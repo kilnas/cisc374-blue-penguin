@@ -50,6 +50,7 @@ var l;
 var wallGroup;
 var ufo;
 var turtleText;
+var speech1;
 
 var problem;
 var onProblem;
