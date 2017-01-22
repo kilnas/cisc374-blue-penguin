@@ -243,7 +243,7 @@ function compareImages(firstImage, secondImage){
 
 function displayImages(obj1, obj2) {
     if (problem == null) {
-        problem = new filterClass(game, 'turtle');
+        problem = new filterClass(game, 'turtlePic1');
         problem.setup();
         onProblem = true;
     }

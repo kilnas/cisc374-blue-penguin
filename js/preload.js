@@ -14,6 +14,10 @@ var preloadState = {
 
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     game.load.image('pic', 'assets/skies/underwater3.png');
+
+    game.load.spritesheet('emptyButton', 'assets/buttons/flixel-button.png', 80, 20);
+    game.load.image('turtlePic1', 'assets/turtles/turtle_1.jpg');
+
     game.load.audio('noir1', 'images/DancesandDames.mp3');
     game.load.image('wall','images/wall.jpg');
     game.load.image('turtle','images/turtle.png');
