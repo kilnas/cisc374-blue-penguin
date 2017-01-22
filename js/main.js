@@ -36,6 +36,8 @@ var wordDelay = 120;
 var lineDelay = 400;
 
 
+
+
 function preload() {
 
     game.load.image('phaser', 'assets/sprites/phaser2.png');
@@ -48,18 +50,25 @@ function preload() {
     game.load.image('player','assets/sprites/phaser-dude.png');
 
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-    game.load.image('pic', '../assets/skies/underwater3.png');
+    game.load.image('pic', 'assets/skies/underwater3.png');
+
+    game.load.spritesheet('emptyButton', 'assets/buttons/flixel-button.png', 80, 20);
+    game.load.image('turtle', 'assets/turtles/turtle_1.jpg');
 }
 
 
 var sprites;
 var cursors;
 var testImage;
+var testSprite;
 
 var player;
 var npc;
 var cursors;
 var inBound;
+
+var problem;
+var onProblem;
 
 
 
@@ -76,10 +85,12 @@ function create() {
 
     player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
     npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
+    testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
     //game.physics.p2.enable(player);
-    game.physics.enable([player,npc], Phaser.Physics.ARCADE);
+    game.physics.enable([player,npc,testSprite], Phaser.Physics.ARCADE);
     npc.body.immovable = true;
+    testSprite.body.immovable = true;
     player.fixedRotation = true;
 
     cursors = game.input.keyboard.createCursorKeys();
@@ -103,6 +114,8 @@ function create() {
     // console.log(testImage);
     // testImage.toggle();
 
+    
+    onProblem = false;
 
 
 /*
@@ -165,12 +178,14 @@ function update(){
 
     game.physics.arcade.collide(player, npc, collisionHandler, null, this);
 
+    game.physics.arcade.collide(player, testSprite, displayImages, null, this);
+
 
 
     //Touch Based Movement
     //ActivePointer should be mouse OR finger, depending on device
 
-    if(createTextFlag == false){// if text box not up, move //&& inBound = true
+    if(!onProblem && createTextFlag == false){// if text box not up, move //&& inBound = true
       if (game.input.activePointer.isDown)
       {
           //  400 is the speed it will move towards the touch
@@ -233,6 +248,15 @@ function collisionHandler (obj1, obj2) {
     }
 
 
+}
+
+function displayImages(obj1, obj2) {
+    if (problem == null) {
+        problem = new filterClass(game, 'turtle');
+        problem.setup();
+        onProblem = true;
+    }
+    
 }
 
 function render() {

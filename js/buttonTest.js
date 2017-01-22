@@ -19,6 +19,9 @@ var sprite;
 var filteredSprite;
 var text;
 
+var cleanImage;
+var filterImage;
+
 function create() {
 
        var blurShader = [
@@ -84,26 +87,33 @@ function create() {
 
     //sprite = game.add.sprite(0, 0, 'metal');
     
-    sprite = game.add.sprite(0, 0, 'turtle');
-    sprite.scale.setTo(0.5, 0.5);
+    // sprite = game.add.sprite(0, 0, 'turtle');
+    // sprite.scale.setTo(0.5, 0.5);
 
     blurFilter = new Phaser.Filter(game, null, blurShader);
     normalFilter = new Phaser.Filter(game, null, normalShader);
     
-    filteredSprite = game.add.sprite(300, 0, 'turtle');
-    filteredSprite.scale.setTo(0.5, 0.5);
-    applyFilter(filteredSprite, blurFilter);
+    // filteredSprite = game.add.sprite(300, 0, 'turtle');
+    // filteredSprite.scale.setTo(0.5, 0.5);
+    // applyFilter(filteredSprite, blurFilter);
 
-    //blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
+    // sprite.filters = null;
 
-    //this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
-
-    sprite.filters = null;
+    setupImages(game, 'turtle', blurFilter);
     
     
     var Dbutton;
     Dbutton = new FilterButton(game, game.math.roundTo(game.width/2), 312, "emptyButton", "BLUR", blurFilter, Dbutton);
     Dbutton.button.scale.setTo(2,2);
+
+    var undoButton;
+    undoButton = new LabelButton(game, game.math.roundTo(game.width/2), 380, "emptyButton", "UNDO", undoOnClick, undoButton);
+    undoButton.scale.setTo(2,2);
+
+
+    //blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
+
+    //this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
 
 }
 
@@ -128,24 +138,61 @@ function applyFilter(image, newFilter){
     
     //toggle off
     else{
-        image.filters = [ normalFilter ];
         image.filters = null;
-        newFilter.destroy();
         image.isFiltered = false;
         
     }
 }
 
+function setupImages(game, imageKey, filters) {
+    cleanImage = game.add.sprite(0, 0, imageKey);
+    cleanImage.scale.setTo(0.5, 0.5);
+    filterImage = game.add.sprite(game.world.centerX + 200, 0, imageKey);
+    filterImage.scale.setTo(0.5, 0.5);
+    filterImage.x = game.world.width - filterImage.width;
+    applyFilter(filterImage, filters);
+}
+
+function pushFilter(image, filter) {
+    if (image.filters == null) {
+        image.filters = [ filter ];
+    }
+    else {
+        image.filters.push(filter);
+        image.filters = image.filters;
+        console.log(image.filters);
+    }
+}
+
+function popFilter(image) {
+    if (image.filters != null) {
+        if (image.filters.length <= 1) {
+            image.filters = null;
+        }
+        else {
+            image.filters.pop(image);
+            image.filters = image.filters;
+        }
+    }
+    
+}
+
 
 //default callback for FilterButtons
 function filterOnClick(){
-    applyFilter(sprite, this.filter);
+    // applyFilter(cleanImage, this.filter);
+    pushFilter(cleanImage, this.filter);
     this.button.frame = this.button.frame == 2 ? 0 : 2;
+}
+
+function undoOnClick() {
+    popFilter(cleanImage);
+    this.frame = this.frame == 2 ? 0 : 2;
 }
 
 
 
 
 function update() {
-    //sprite.filters.update()
+    // cleanImage.filters.update()
 }
