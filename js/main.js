@@ -2,11 +2,7 @@ var mainState = {
 
   //place all the objects in the world
   create: function(){
-    // var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
-    // logo.anchor.setTo(0.5, 0.5);
       
-    var progress = 0;
-
     music = game.add.audio('noir1');
     music.play();
 
@@ -25,17 +21,16 @@ var mainState = {
       player = game.add.sprite(playerX, playerY, 'player');
     }
 
-    //npc = game.add.sprite(game.world.centerX/2, game.world.centerY/2, 'npc');
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
 
     turtle = new Turtle(80, 40, game, 'turtle', content);
+    
 
     introText = new Textbox(game.camera.width / 2, game.camera.height / 2, intro);
     turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, content);
 
     game.physics.enable([player,testSprite], Phaser.Physics.ARCADE);
-    //npc.body.immovable = true;
     testSprite.body.immovable = true;
     player.fixedRotation = true;
 
@@ -194,7 +189,7 @@ var mainState = {
       player.body.velocity.setTo(0, 0);
       player.body.angularVelocity = 0;
 
-      //game.physics.arcade.collide(player, testSprite, displayImages, null, this);
+      game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
 
       game.physics.arcade.collide(player, turtle, collisionHandler, null, this);

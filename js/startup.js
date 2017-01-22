@@ -19,6 +19,7 @@ var gameOverTextGroup;
 var playerX;
 var playerY;
 var startingGame = true;
+var foundPerson = false;
 //var grd;
 
 content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z z z z z zz zzzz zzzz zzzz zzzz zzzzz", 'you found a key', "orange peels"];
@@ -76,6 +77,12 @@ function collisionHandler2 (obj1, obj2) {
   console.log('wall hit');
 }
 
+function collidePerson(){
+    if(!foundPerson){
+        foundPerson = true;
+        console.log("found sonic!");
+    }
+}
 
 
 function listener(){
