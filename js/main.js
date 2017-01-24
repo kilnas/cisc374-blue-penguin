@@ -57,9 +57,63 @@ var mainState = {
     turtle.body.immovable = true;
     wallGroup = game.add.physicsGroup();
 
-    //var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
+
 
     var level = [
+      '                                                       ',
+      '                                                       ',
+      '                                                       ',
+      '                                                       ',
+      '                              ',
+      '                              ',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '  ',
+      '   ',
+      ' ',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '              xxxxxxxxxxxxxxxxxxxxxxxx             ',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              x                      x',
+      '              xxxxxxxxxx     xxxxxxxxx             ',
+    ];
+    var level2 = [
      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
      'x              x                                      x',
      'x              x                                      x',
@@ -113,6 +167,8 @@ var mainState = {
      'x                      x                          x',
      'xxxxxxxxxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxxxxxxxxx',
  ];
+
+
 
  for (var i = 0; i < level.length; i++) {
      for (var j = 0; j < level[i].length; j++) {

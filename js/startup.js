@@ -58,7 +58,6 @@ var introText;
 
 var music;
 var mute_label;
-var l;
 var wallGroup;
 var ufo;
 var turtleText;
