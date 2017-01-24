@@ -1,7 +1,7 @@
 
 var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
-/*MonsterMystery = {
+/*TurtleAdventure = {
 
 }*/
 
@@ -53,7 +53,7 @@ function create() {
      blurX.blur = 100;
      blurY.blur = 1;
 
-    testImage = new MonsterMystery.GameImage(game, 'spinner', 50, 50, gray);
+    testImage = new TurtleAdventure.GameImage(game, 'spinner', 50, 50, gray);
     console.log(testImage);
     testImage.toggle();*/
 

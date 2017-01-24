@@ -2,7 +2,19 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example');
 
 
 //declare Game object and other globals
-var MonsterMystery = {
+var TurtleAdventure = new function(){
+  this.createTextFlag = false;
+  this.createDiaFlag = false;
+  this.playerX;
+  this.playerY;
+  this.startingGame = true;
+  this.foundPerson = false;
+  this.solvedTurtle = false;
+
+  this.level1 = new function() {
+    this.foundPerson = false;
+    this.solvedTurtle = false;
+  }
 
 }
 
@@ -56,30 +68,7 @@ var puzzle;
 var completedPuzzle1 = false;
 
 
-//-----------------HELPER FUNCTIONS---------------//
-function collisionHandler (obj1, obj2) {
-
-    if(foundPerson){
-    player.tint = 0xdd0c39;
-
-  //if(createTextFlag === false){
-    //createText();
-  //}
-
-  // turtleText = new Textbox(game.camera.width / 2, game.camera.height / 2, obj2.message);
-  // turtleText.createText();
-
-
-  obj2.hitTurtle();
-    }
-    else{
-        console.log("you havent talked to da person yet!");
-    }
-
-  //console.log(player.x);
-}
-
-function collisionHandler2 (obj1, obj2) {
+function wallCollision (obj1, obj2) {
   //console.log('wall hit');
 }
 
@@ -142,16 +131,6 @@ function compareImages(firstImage, secondImage){
 
 
   return true;
-
-}
-
-
-
-function displayImages(obj1, obj2) {
-    if (puzzle == null) {
-        puzzle = new filterClass(game, 'turtlePic1');
-        puzzle.setup();
-    }
 
 }
 

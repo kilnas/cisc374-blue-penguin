@@ -53,24 +53,9 @@ var mainState = {
 
     game.camera.follow(player);
 
-    var blurX = game.add.filter('BlurX');
-    var blurY = game.add.filter('BlurY');
-    var gray = game.add.filter('Gray');
-
-
-    blurX.blur = 100;
-    blurY.blur = 1;
-
     game.physics.enable([turtle], Phaser.Physics.ARCADE);
     turtle.body.immovable = true;
     wallGroup = game.add.physicsGroup();
-
-
-    // logo.filters = [blurX, blurY, gray];
-    //  Here we create a group, populate it with sprites, give them all a random velocity
-    //  and then check the group against itself for collision
-
-
 
     //var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 200, align: "center", backgroundColor: "#ffff00" };
 
@@ -214,7 +199,7 @@ var mainState = {
 
       // game.physics.arcade.collide(player, turtle, collisionHandler, null, this);
       game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
-      game.physics.arcade.collide(player, wallGroup, collisionHandler2, null, this);
+      game.physics.arcade.collide(player, wallGroup, wallCollision, null, this);
 
 
       // if (cursors.up.isDown)
@@ -255,33 +240,7 @@ var mainState = {
 
       }
 
-    }else{
     }
-
-
-
-
-
-
-    if (spacebar.isDown)
-      {
-
-        //speech1.removeText();
-        //turtleText.removeText();
-        console.log(createDiaFlag);
-        console.log(createTextFlag);
-
-        //turtleText.removeText();
-        //speech1.removeText();
-        //test code for win state
-        //TODO remove next line
-        //this.win();
-      }
-
-
-
-
-
 
 
   },
@@ -289,12 +248,6 @@ var mainState = {
 
   render: function(){
 
-    //game.debug.cameraInfo(game.camera, 32, 32);
-    //game.debug.spriteCoords(player, 32, 500);
-  },
-
-  win: function(){
-    game.state.start('GameOver');
   },
 
   stateChangeCollision: function(obj1, obj2){
