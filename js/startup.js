@@ -45,7 +45,8 @@ var npc;
 var cursors;
 var inBound;
 var turtle;
-var introText; //textbox
+var introText;
+var NpcTest;
 
 var music;
 var mute_label;
