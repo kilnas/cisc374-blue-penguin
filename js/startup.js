@@ -11,30 +11,25 @@ var TurtleAdventure = new function(){
   this.foundPerson = false;
   this.solvedTurtle = false;
 
-  this.level1 = new function() {
+  this.Level1 = new function() {
     this.foundPerson = false;
     this.solvedTurtle = false;
+    this.compltetedPuzzle1 = false;
   }
 
 }
 
 //----------VARIABLES ---------------------//
 var w = 800; // game width
-//var text = null;
-//var text2;
-var roundRect;
 var spacebar;
 
 var createTextFlag = false;
 var createDiaFlag = false;
-var menuTextGroup;
-var gameOverTextGroup;
 var playerX;
 var playerY;
 var startingGame = true;
 var foundPerson = false;
 var solvedTurtle = false;
-//var grd;
 
 content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z z z z z zz zzzz zzzz zzzz zzzz zzzzz", 'you found a key', "orange peels"];
 var intro = ['It has been 10 years since you have lost Powder, your pet turtle. Recently a string of turdel disappearances has occurred. You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion. Unfortuneatly all the wanted pictures of missing turtuls are all distorted. It is up to you to match the tertols you find to their rightful owners.'];
@@ -44,23 +39,17 @@ var sonictalk = ['HEY! Have you seen my missing turtle!?! I have not seen him in
 
 
 
-var sprites;
-var cursors;
-var testImage;
-var testImage2;
 
 var player;
 var npc;
 var cursors;
 var inBound;
 var turtle;
-var introText;
+var introText; //textbox
 
 var music;
 var mute_label;
-var l;
 var wallGroup;
-var ufo;
 var turtleText;
 var speech1;
 
@@ -84,10 +73,6 @@ function collidePerson(obj1, obj2){
     }
 }
 
-
-function listener(){
-  testImage.toggle();
-}
 
 
 //method to compare if two images are filtered the same way
@@ -134,6 +119,17 @@ function compareImages(firstImage, secondImage){
 
 }
 
+function onTap(pointer, doubleTap) {
+  if (doubleTap)
+  {
+    //  They double-tapped, so swap the image
+    if(createDiaFlag == true){
+      console.log('ppppppppppp');
+      speech1.removeText();
+    }
+  }
+}
+
 
 //-----------STATES-----------------//
 
@@ -142,6 +138,7 @@ game.state.add("Preload", preloadState);
 game.state.add("GameTitle", gameTitleState);
 game.state.add("Intro", introState);
 game.state.add("Main", mainState);
+game.state.add("Level1", Level1);
 game.state.add("Image", imageState);
 game.state.add("GameOver", gameOverState);
 game.state.start("Boot");
