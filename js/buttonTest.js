@@ -85,19 +85,10 @@ function create() {
 
     game.stage.backgroundColor = '#182d3b';
 
-    //sprite = game.add.sprite(0, 0, 'metal');
-    
-    // sprite = game.add.sprite(0, 0, 'turtle');
-    // sprite.scale.setTo(0.5, 0.5);
 
     blurFilter = new Phaser.Filter(game, null, blurShader);
     normalFilter = new Phaser.Filter(game, null, normalShader);
     
-    // filteredSprite = game.add.sprite(300, 0, 'turtle');
-    // filteredSprite.scale.setTo(0.5, 0.5);
-    // applyFilter(filteredSprite, blurFilter);
-
-    // sprite.filters = null;
 
     setupImages(game, 'turtle', blurFilter);
     
@@ -110,14 +101,10 @@ function create() {
     undoButton = new LabelButton(game, game.math.roundTo(game.width/2), 380, "emptyButton", "UNDO", undoOnClick, undoButton);
     undoButton.scale.setTo(2,2);
 
-
-    //blurButton = game.add.button(game.world.centerX + 150, 200, 'button', actionOnClick, this, 2, 1, 0);
-
-    //this.btnStart = new LabelButton(game, 480, 512, "emptyButton", "BLUR", doBtnStartHandler, this, 1, 0, 2); // button frames 1=over, 0=off, 2=down
-
 }
 
 
+// button frames 1=over, 0=off, 2=down
 
 //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
 var FilterButton = function(game, x, y, key, label, filter, overFrame, outFrame, downFrame, upFrame){
@@ -189,7 +176,6 @@ function undoOnClick() {
     popFilter(cleanImage);
     this.frame = this.frame == 2 ? 0 : 2;
 }
-
 
 
 
