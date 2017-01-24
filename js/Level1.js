@@ -10,6 +10,8 @@ var Level1 = {
     game.world.setBounds(0, 0, 1920, 1920);
 
     turtle = new Turtle(80, 60, game, 'turtle', content);
+    NpcTest = new NPC(200, 100, game, 'kiwi', npctalk);
+    
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
     if(startingGame){
       player = game.add.sprite(game.world.centerX, game.world._height - 200, 'kiwi');
@@ -67,6 +69,7 @@ var Level1 = {
     game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
     game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
     game.physics.arcade.collide(player, wallGroup, wallCollision, null, this);
+    game.physics.arcade.collide(player, NpcTest, npcCollision, null, this);
 
     if(createDiaFlag == false){// if text box not up, move //createTextFlag == false ||
       if (game.input.activePointer.isDown)
@@ -87,10 +90,7 @@ var Level1 = {
     }else if(createDiaFlag == true){
 
       if(game.input.activePointer.isDown){
-
-        //speech1.removeText();
         console.log('hallowe');
-
       }
 
     }

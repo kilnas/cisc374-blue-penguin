@@ -66,6 +66,8 @@ var DialogueBox = function(x, y, messageArray){
       this.text.alpha = 0; //destroy();
       createDiaFlag = false;
       console.log('remove dialog');
+    wordIndex = 0;
+    lineIndex = 0;
   }
 
 

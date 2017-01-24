@@ -27,8 +27,17 @@ Turtle.prototype.constructor = Turtle;
 
 //displays an NPC's dialogue
 var sayDialogue = function(person){
-  console.log("dialogue: " + person.dialogue);
   //later, add an overlay that displays text box and sprite for this person
+  
+  if(!currentDialogue){
+    currentDialogue = new DialogueBox(game.camera.width/2, game.camera.height/2, person.dialogue);
+    console.log("made new dialog box");
+  }
+  else{
+    currentDialogue.content = person.dialogue;
+    console.log("updated dialog content " + currentDialogue.content);
+  }
+  currentDialogue.createText();
 }
 
 //Collision handler for NPCs
