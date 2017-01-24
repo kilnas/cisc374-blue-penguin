@@ -55,6 +55,7 @@ var cursors;
 var inBound;
 var turtle;
 var introText;
+var NpcTest;
 
 var music;
 var mute_label;

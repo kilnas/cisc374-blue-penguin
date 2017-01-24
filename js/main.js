@@ -13,6 +13,7 @@ var mainState = {
 
 
     turtle = new Turtle(80, 60, game, 'turtle', content);
+    NpcTest = new NPC(100, 100, game, 'turtle', "my npc dialogue");
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
@@ -252,6 +253,8 @@ var mainState = {
 
       game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
       game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
+      
+      game.physics.arcade.collide(player, NpcTest, npcCollision, null, this);
 
       // game.physics.arcade.collide(player, turtle, collisionHandler, null, this);
       game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);

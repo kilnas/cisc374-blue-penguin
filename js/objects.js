@@ -25,6 +25,36 @@ Turtle.prototype = Object.create(Phaser.Sprite.prototype);
 Turtle.prototype.constructor = Turtle;
 
 
+//displays an NPC's dialogue
+var sayDialogue = function(person){
+  console.log("dialogue: " + person.dialogue);
+  //later, add an overlay that displays text box and sprite for this person
+}
+
+//Collision handler for NPCs
+var npcCollision = function(player, npc){
+  sayDialogue(npc);
+}
+
+
+//a subclass(?) of sprite that displays a dialogue when collided with
+NPC = function(x, y, game, sprite, dialogue){
+    this.dialogue = dialogue;
+    Phaser.Sprite.call(this, game, x, y, sprite);
+    
+    this.enableBody = true;
+    game.add.existing(this);
+    
+    game.physics.enable([this], Phaser.Physics.ARCADE);
+    this.body.immovable = true;
+  
+}
+
+NPC.prototype = Object.create(Phaser.Sprite.prototype);
+NPC.prototype.constructor = NPC;
+
+
+
 //not used NOT USING THIS RIGHT NOW OK
 Wall = function(x, y, height, width){
 //this.sprite = game.add.sprite(200, 240, 'wall');
