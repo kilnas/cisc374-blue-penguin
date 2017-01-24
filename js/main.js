@@ -13,7 +13,7 @@ var mainState = {
 
 
     turtle = new Turtle(80, 60, game, 'turtle', content);
-    NpcTest = new NPC(100, 100, game, 'turtle', "my npc dialogue");
+    NpcTest = new NPC(200, 100, game, 'kiwi', "hi im an npc");
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
@@ -31,7 +31,7 @@ var mainState = {
     }
     createTextFlag = false;
     testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
-
+    
 
       if(!foundPerson){
           turtle.visible = false;
@@ -252,6 +252,9 @@ var mainState = {
       player.body.angularVelocity = 0;
 
       game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
+      game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
+
+      game.physics.arcade.collide(player, NpcTest, npcCollision, null, this);
       game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
       game.physics.arcade.collide(player, wallGroup, wallCollision, null, this);
 
