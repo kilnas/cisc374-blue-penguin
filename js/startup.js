@@ -70,16 +70,9 @@ function collidePerson(obj1, obj2){
     if(!foundPerson){
         foundPerson = true;
         console.log("found sonic!");
-      if(!currentDialogue){
-        currentDialogue = new DialogueBox(game.camera.width/2, game.camera.height/2, sonictalk);
-      }
-      else{
-        currentDialogue.content = sonictalk;
-      }
-        currentDialogue.createText();
-
         turtle.visible = true;
     }
+  npcCollision(obj1, obj2);
 }
 
 

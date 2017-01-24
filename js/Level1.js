@@ -12,7 +12,10 @@ var Level1 = {
     turtle = new Turtle(80, 60, game, 'turtle', content);
     NpcTest = new NPC(200, 100, game, 'kiwi', npctalk);
     
-    testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
+    //testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
+    testSprite = new NPC(game.world.centerX/2, game.world.centerY/2 + 300,game, 'npc', sonictalk);
+    
+    
     if(startingGame){
       player = game.add.sprite(game.world.centerX, game.world._height - 200, 'kiwi');
     }
@@ -23,8 +26,7 @@ var Level1 = {
 
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.enable([player,testSprite, turtle], Phaser.Physics.ARCADE);
-    testSprite.body.immovable = true;
+    game.physics.enable([player, turtle], Phaser.Physics.ARCADE);
     turtle.body.immovable = true;
     player.fixedRotation = true;
 

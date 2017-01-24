@@ -29,7 +29,6 @@ var mainState = {
 
     }
     createTextFlag = false;
-    testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
     
 
       if(!foundPerson){
