@@ -47,22 +47,11 @@ var Level1 = {
     }
 
 
-
-
-
-
     var level = [
       '',
       '',
       '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      '              xxxxxxxxxxxxxxxxxxxxxxxx             ',
       '       x                                     x',
       '       x                                     x',
       '       x                                     x',
@@ -100,11 +89,20 @@ var Level1 = {
       '       x                                     x',
       '       x                                     x',
       '       x                                     x',
+      '       x                                     x',
+      '       x       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      '       x                                     x',
+      '       x                                     x',
+      '       x                                     x',
+      '       x                                     x',
+      '       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx       x',
+      '       x                                     x'
       '       x                                     x',
       '       x                                     x',
       '       x                                     x ',
       '       xxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxxxx    ',
     ];
+
 
 
 
