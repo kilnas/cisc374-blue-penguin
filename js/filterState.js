@@ -1,8 +1,8 @@
 var imageState = {
 
   create: function(){
-
-    var puzzle = new filterClass(game, 'turtlePic1', [[blurShader, "BLUR"], [blurShader,"COOLBLUR"], [blurShader, "TUMBLUR"]]);
+    //format for shader list: [[shader, textName, passes]
+    var puzzle = new filterClass(game, 'turtlePic1', [[blurShader, "BLUR", 1], [blurShader,"COOLBLUR", 0], [blurShader, "TUMBLUR", 2]]);
     puzzle.setup();
 
   },
