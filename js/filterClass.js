@@ -8,19 +8,22 @@ function filterClass(game, imageKey, shaders) {
     var filterImage = null;
     this.filters = [];
     this.shaders = shaders;
-  
 
     var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2);
     var cameraTopY = game.camera.y + (game.height/2) - (game.camera.height/2);
 
 
     this.setup = function() {
+
       this.makeFilters();
       this.setupImages(game, this.imageKey, this.filters);
       this.setupButtons();
+      this.setupSlider();
+
+
     }
 
-  
+
   //make array of filters from the shader array
   this.makeFilters = function(){
     for (var i=0; i < this.shaders.length; i++){
@@ -29,14 +32,14 @@ function filterClass(game, imageKey, shaders) {
       this.filters[i].passes = this.shaders[i][2];
     }
   }
-  
-  
+
+
   //make a button for each filter in our filters array. also makes undo and complete buttons
   this.setupButtons = function(){
     var yloc = 310;
     var xspace = 100;
     var side = 1;
-    
+
     for (var i=0; i < this.filters.length; i++){
       if(this.filters.length == 1 || i==0){
         side = 0; //middle
@@ -47,22 +50,26 @@ function filterClass(game, imageKey, shaders) {
       else{
         side = -1; //left side
       }
-      
-      
+
+
     var newButton = new FilterButton(game, cameraTopX + (game.camera.width/2) + xspace*side*(Math.round(i/2)+1), cameraTopY + yloc, "emptyButton", this.filters[i].name, this.filters[i], newButton);
       newButton.button.scale.setTo(2,2);
     }
-    
+
     var undoButton;
     undoButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 380, "emptyButton", "UNDO", undoOnClick, undoButton);
     undoButton.scale.setTo(2,2);
-    
+
     var completeButton;
     completeButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 450, "emptyButton", "COMPLETE", completeFilter, completeButton);
     completeButton.scale.setTo(2,2);
   }
-  
-  
+
+  this.setupSlider = function(){
+    var slideButton = game.add.sprite(50, 300, 'slider');
+  }
+
+
   //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
     var FilterButton = function(game, x, y, key, label, filter, overFrame, outFrame, downFrame, upFrame){
         this.filter = filter;
@@ -94,7 +101,7 @@ function filterClass(game, imageKey, shaders) {
         filterImage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
         filterImage.scale.setTo(0.5, 0.5);
         filterImage.x = cameraTopX + game.camera.width - filterImage.width;
-      
+
       
       //right now this applies all filters in the list to the filtered image
       //later you might want to only apply 1 or 2 or some other combo so the player has to choose amongst the options
@@ -149,4 +156,5 @@ function filterClass(game, imageKey, shaders) {
           console.log("Images different...try again");
         }
     }
+
 }

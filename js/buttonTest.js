@@ -157,6 +157,43 @@ function create() {
 
     ];
 
+    var sobelShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec2 resolution = vec2(800, 600);",
+            "float x = 1.0 / resolution.x;",
+            "float y = 1.0 / resolution.y;",
+
+            "vec2 tc = vTextureCoord;",
+
+            "vec4 horizEdge = vec4( 0.0 );",
+	          "horizEdge -= texture2D( uSampler, vec2( tc.x - x, tc.y - y ) ) * 1.0;",
+	          "horizEdge -= texture2D( uSampler, vec2( tc.x - x, tc.y     ) ) * 2.0;",
+	          "horizEdge -= texture2D( uSampler, vec2( tc.x - x, tc.y + y ) ) * 1.0;",
+	          "horizEdge += texture2D( uSampler, vec2( tc.x + x, tc.y - y ) ) * 1.0;",
+	          "horizEdge += texture2D( uSampler, vec2( tc.x + x, tc.y     ) ) * 2.0;",
+	          "horizEdge += texture2D( uSampler, vec2( tc.x + x, tc.y + y ) ) * 1.0;",
+	          "vec4 vertEdge = vec4( 0.0 );",
+	          "vertEdge -= texture2D( uSampler, vec2( tc.x - x, tc.y - y ) ) * 1.0;",
+	          "vertEdge -= texture2D( uSampler, vec2( tc.x    , tc.y - y ) ) * 2.0;",
+	          "vertEdge -= texture2D( uSampler, vec2( tc.x + x, tc.y - y ) ) * 1.0;",
+	          "vertEdge += texture2D( uSampler, vec2( tc.x - x, tc.y + y ) ) * 1.0;",
+	          "vertEdge += texture2D( uSampler, vec2( tc.x    , tc.y + y ) ) * 2.0;",
+	          "vertEdge += texture2D( uSampler, vec2( tc.x + x, tc.y + y ) ) * 1.0;",
+	          "vec3 edge = sqrt((horizEdge.rgb * horizEdge.rgb) + (vertEdge.rgb * vertEdge.rgb));",
+
+            "gl_FragColor = vec4(edge, 0.0);",
+
+        "}",
+
+    ];
+
     var removeGreenShader = [
         "precision mediump float;",
 
@@ -216,7 +253,7 @@ function create() {
 
 
     // blurFilter = new Phaser.Filter(game, null, blurShader);
-    blurFilter = new Phaser.Filter(game, null, removeBlueShader);
+    blurFilter = new Phaser.Filter(game, null, sobelShader);
 
     normalFilter = new Phaser.Filter(game, null, normalShader);
 

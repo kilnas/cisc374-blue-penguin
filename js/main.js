@@ -29,7 +29,7 @@ var mainState = {
 
     }
     createTextFlag = false;
-    
+
 
       if(!foundPerson){
           turtle.visible = false;
