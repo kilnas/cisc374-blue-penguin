@@ -87,6 +87,14 @@ function compareImages(firstImage, secondImage){
   var arr1 = firstImage.filters;
   var arr2 = secondImage.filters;
 
+  var nameArr1 = [];
+  var nameArr2 = [];
+
+  for(var i = arr1.length; i--;){
+    nameArr1.push(arr1[i].name);
+    nameArr2.push(arr2[i].name);
+  }
+
   if (firstImage.key != secondImage.key){
     return false;
   }
@@ -104,8 +112,8 @@ function compareImages(firstImage, secondImage){
   }
 
   //if here, we know that they are both arrays so we can sort them
-  arr1 = arr1.sort();
-  arr2 = arr2.sort();
+  arr1 = nameArr1.sort();
+  arr2 = nameArr2.sort();
 
 
 
