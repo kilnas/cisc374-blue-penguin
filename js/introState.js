@@ -20,7 +20,7 @@ var introState = {
 
   toMain: function(){
     // game.state.start("Main");
-    console.log(intro);
+    console.log(introSlideText);
     solvedTurtle = false;
     completedPuzzle1 = false;
     foundPerson = false;
