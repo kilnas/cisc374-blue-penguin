@@ -2,7 +2,7 @@ var imageState = {
 
   create: function(){
 
-    var puzzle = new filterClass(game, 'turtlePic1');
+    var puzzle = new filterClass(game, 'turtlePic1', [[blurShader, "BLUR"], [blurShader,"COOLBLUR"], [blurShader, "TUMBLUR"]]);
     puzzle.setup();
 
   },

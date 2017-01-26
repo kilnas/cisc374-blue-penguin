@@ -35,7 +35,7 @@ var sayDialogue = function(person){
   }
   else{
     currentDialogue.content = person.dialogue;
-    console.log("updated dialog content " + currentDialogue.content);
+    //console.log("updated dialog content " + currentDialogue.content);
   }
   currentDialogue.createText();
 }
