@@ -79,22 +79,15 @@ function collidePerson(obj1, obj2){
 
 //method to compare if two images are filtered the same way
 function compareImages(firstImage, secondImage){
-  //console.log("compare images");
-  //console.log(firstImage);
-  //console.log(secondImage);
+  console.log("compare images");
+  console.log(firstImage);
+  console.log(secondImage);
 
   //test for array comparisons
   var arr1 = firstImage.filters;
   var arr2 = secondImage.filters;
 
-  var nameArr1 = [];
-  var nameArr2 = [];
-
-  for(var i = arr1.length; i--;){
-    nameArr1.push(arr1[i].name);
-    nameArr2.push(arr2[i].name);
-  }
-
+  
   if (firstImage.key != secondImage.key){
     return false;
   }
@@ -111,7 +104,15 @@ function compareImages(firstImage, secondImage){
     return false;
   }
 
-  //if here, we know that they are both arrays so we can sort them
+  //if here, we know that they are both arrays of same length so we can sort them
+  var nameArr1 = [];
+  var nameArr2 = [];
+  
+  for(var i = arr1.length; i--;){
+    nameArr1.push(arr1[i].name);
+    nameArr2.push(arr2[i].name);
+  }
+  
   arr1 = nameArr1.sort();
   arr2 = nameArr2.sort();
 

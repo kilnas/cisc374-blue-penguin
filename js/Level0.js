@@ -9,11 +9,11 @@ var Level0 = {
     game.add.tileSprite(0, 0, 1920, 1920, 'background');
     game.world.setBounds(0, 0, 1920, 1920);
 
-    turtle = new Turtle(80, 60, game, 'turtle', content);
+    turtle = new Turtle(game.world.centerX/2 + 400, game.world.centerY/2 + 600, game, 'turtle', content);
     NpcTest = new NPC(200, 100, game, 'kiwi', npctalk);
 
     //testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
-    testSprite = new NPC(game.world.centerX/2, game.world.centerY/2 + 300,game, 'npc', sonictalk);
+    testSprite = new NPC(game.world.centerX/2 + 200, game.world.centerY/2 + 900,game, 'npc', sonictalk);
 
 
     if(startingGame){
