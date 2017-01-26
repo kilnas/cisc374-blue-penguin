@@ -13,7 +13,6 @@ var mainState = {
 
 
     turtle = new Turtle(80, 60, game, 'turtle', content);
-    NpcTest = new NPC(100, 100, game, 'turtle', "my npc dialogue");
 
     //logic to get correct player position if coming from imageState
     if(startingGame){
@@ -30,7 +29,6 @@ var mainState = {
 
     }
     createTextFlag = false;
-    testSprite = game.add.sprite(game.world.centerX/2, game.world.centerY/2 + 300, 'npc');
 
 
       if(!foundPerson){
@@ -60,60 +58,7 @@ var mainState = {
 
 
 
-    var level = [
-      '                                                       ',
-      '                                                       ',
-      '                                                       ',
-      '                                                       ',
-      '                              ',
-      '                              ',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '  ',
-      '   ',
-      ' ',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '              xxxxxxxxxxxxxxxxxxxxxxxx             ',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              x                      x',
-      '              xxxxxxxxxx     xxxxxxxxx             ',
-    ];
+
     var level2 = [
      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
      'x              x                                      x',
@@ -171,17 +116,17 @@ var mainState = {
 
 
 
- for (var i = 0; i < level.length; i++) {
-     for (var j = 0; j < level[i].length; j++) {
-
-         // Create a wall and add it to the 'walls' group
-         if (level[i][j] == 'x') {
-             var wall = game.add.sprite(32+32*j, 32+32*i, 'wall');
-             wallGroup.add(wall);
-             wall.body.immovable = true;
-         }
-       }
-     }
+ // for (var i = 0; i < level.length; i++) {
+ //     for (var j = 0; j < level[i].length; j++) {
+ //
+ //         // Create a wall and add it to the 'walls' group
+ //         if (level[i][j] == 'x') {
+ //             var wall = game.add.sprite(32+32*j, 32+32*i, 'wall');
+ //             wallGroup.add(wall);
+ //             wall.body.immovable = true;
+ //         }
+ //       }
+ //     }
 
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
@@ -193,8 +138,8 @@ var mainState = {
     {
         //  They double-tapped, so swap the image
         if(createDiaFlag == true){
-          console.log('ppppppppppp');
-          speech1.removeText();
+          //console.log('ppppppppppp');
+          currentDialogue.removeText();
         }
     }
     else
@@ -252,6 +197,8 @@ var mainState = {
       player.body.angularVelocity = 0;
 
       game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
+      game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
+
       game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
       game.physics.arcade.collide(player, wallGroup, wallCollision, null, this);
 
@@ -288,8 +235,6 @@ var mainState = {
     }else if(createDiaFlag == true){
 
       if(game.input.activePointer.isDown){
-
-          //speech1.removeText();
           console.log('hallowe');
 
       }

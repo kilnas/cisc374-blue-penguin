@@ -32,10 +32,14 @@ var foundPerson = false;
 var solvedTurtle = false;
 
 content = ['hello darkness my old friend', "zz zzz zzzz zzzz zzz zzz z z z z z z z z z z zz zzzz zzzz zzzz zzzz zzzzz", 'you found a key', "orange peels"];
+
 var intro = ['It has been 10 years since you have lost Powder, your pet turtle. Recently a string of turdel disappearances has occurred. You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion. Unfortuneatly all the wanted pictures of missing turtuls are all distorted. It is up to you to match the tertols you find to their rightful owners.'];
+
 var intro2 = ['It has been 10 years since you have lost Powder, your pet turtle.', "Recently a string of turdel disappearances has occured.", 'You have gotten a lead that there has been some tertdl sightings at the Professor Pixel mansion.', "Unfortuneatly all the wanted pictures of missing turtuls are all distorted.", 'It is up to you to match the tertols you find to their rightful owners'];
 
 var sonictalk = ['HEY! Have you seen my missing turtle!?! I have not seen him in a week. I am not the only one either. Everyone I know has lost their turtles. Unfortunately all of their pictures in their missing turtle posters are messed up by some evil force.', 'HMM. There are a lot of turtles in this place. Take some missing turtle flyers. Tap twice to stop me from talking.'];
+
+var npctalk = ['me: Im gonna help find and return these turtles.', 'me to me: Steal them and keep them all for yourself'];
 
 
 
@@ -52,7 +56,7 @@ var music;
 var mute_label;
 var wallGroup;
 var turtleText;
-var speech1;
+var currentDialogue;
 
 var puzzle;
 var completedPuzzle1 = false;
@@ -66,12 +70,9 @@ function collidePerson(obj1, obj2){
     if(!foundPerson){
         foundPerson = true;
         console.log("found sonic!");
-
-        speech1 = new DialogueBox(game.camera.width/2, game.camera.height/2, sonictalk);
-        speech1.createText();
-
         turtle.visible = true;
     }
+  npcCollision(obj1, obj2);
 }
 
 
@@ -126,7 +127,7 @@ function onTap(pointer, doubleTap) {
     //  They double-tapped, so swap the image
     if(createDiaFlag == true){
       console.log('ppppppppppp');
-      speech1.removeText();
+      currentDialogue.removeText();
     }
   }
 }
@@ -140,6 +141,7 @@ game.state.add("GameTitle", gameTitleState);
 game.state.add("Intro", introState);
 game.state.add("Main", mainState);
 game.state.add("Level1", Level1);
+//game.state.add("Level0", Level0);
 game.state.add("Image", imageState);
 game.state.add("GameOver", gameOverState);
 game.state.start("Boot");
