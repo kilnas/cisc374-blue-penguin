@@ -1,44 +1,81 @@
 
 
 
-function filterClass(game, imageKey) {
+function filterClass(game, imageKey, shaders) {
     this.game = game;
     this.imageKey = imageKey;
-    var cleanImage = null; 
+    var cleanImage = null;
     var filterImage = null;
+    this.filters = [];
+    this.shaders = shaders;
 
-
-
-    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2); 
+    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2);
     var cameraTopY = game.camera.y + (game.height/2) - (game.camera.height/2);
 
 
     this.setup = function() {
-        
 
-        var blurFilter = new Phaser.Filter(game, null, blurShader);
+      this.makeFilters();
+      this.setupImages(game, this.imageKey, this.filters);
+      this.setupButtons();
+      this.setupSlider();
 
-        this.setupImages(game, this.imageKey, blurFilter);
 
-        var Dbutton;
-        Dbutton = new FilterButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 310, "emptyButton", "BLUR", blurFilter, Dbutton);
-        Dbutton.button.scale.setTo(2,2);
-
-        var undoButton;
-        undoButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 380, "emptyButton", "UNDO", undoOnClick, undoButton);
-        undoButton.scale.setTo(2,2);
-
-        var completeButton;
-        completeButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 450, "emptyButton", "COMPLETE", completeFilter, completeButton);
-        completeButton.scale.setTo(2,2);
     }
 
-    //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
+
+  //make array of filters from the shader array
+  this.makeFilters = function(){
+    for (var i=0; i < this.shaders.length; i++){
+      this.filters[i] = new Phaser.Filter(game, null, this.shaders[i][0]);
+      this.filters[i].name = this.shaders[i][1];
+      this.filters[i].passes = this.shaders[i][2];
+    }
+  }
+
+
+  //make a button for each filter in our filters array. also makes undo and complete buttons
+  this.setupButtons = function(){
+    var yloc = 310;
+    var xspace = 100;
+    var side = 1;
+
+    for (var i=0; i < this.filters.length; i++){
+      if(this.filters.length == 1 || i==0){
+        side = 0; //middle
+      }
+      else if(i%2 == 0){
+        side = 1; //right side
+      }
+      else{
+        side = -1; //left side
+      }
+
+
+    var newButton = new FilterButton(game, cameraTopX + (game.camera.width/2) + xspace*side*(Math.round(i/2)+1), cameraTopY + yloc, "emptyButton", this.filters[i].name, this.filters[i], newButton);
+      newButton.button.scale.setTo(2,2);
+    }
+
+    var undoButton;
+    undoButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 380, "emptyButton", "UNDO", undoOnClick, undoButton);
+    undoButton.scale.setTo(2,2);
+
+    var completeButton;
+    completeButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 450, "emptyButton", "COMPLETE", completeFilter, completeButton);
+    completeButton.scale.setTo(2,2);
+  }
+
+  this.setupSlider = function(){
+    var slideButton = game.add.sprite(50, 300, 'slider');
+  }
+
+
+  //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
     var FilterButton = function(game, x, y, key, label, filter, overFrame, outFrame, downFrame, upFrame){
         this.filter = filter;
         //note: callbackContext is the FilterButton instance, not the LabelButton
         this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
-        
+
     };
 
 
@@ -49,12 +86,12 @@ function filterClass(game, imageKey) {
             image.filters = [ newFilter ];
             image.isFiltered = true;
         }
-        
+
         //toggle off
         else{
             image.filters = null;
             image.isFiltered = false;
-            
+
         }
     }
 
@@ -64,7 +101,13 @@ function filterClass(game, imageKey) {
         filterImage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
         filterImage.scale.setTo(0.5, 0.5);
         filterImage.x = cameraTopX + game.camera.width - filterImage.width;
-        this.applyFilter(filterImage, filters);
+
+      
+      //right now this applies all filters in the list to the filtered image
+      //later you might want to only apply 1 or 2 or some other combo so the player has to choose amongst the options
+      for (var i=0; i < filters.length; i++){
+        pushFilter(filterImage, filters[i]);
+      }
     }
 
     function pushFilter(image, filter) {
@@ -87,14 +130,14 @@ function filterClass(game, imageKey) {
                 image.filters = image.filters;
             }
         }
-        
+
     }
 
 
     //default callback for FilterButtons
     function filterOnClick(){
         // applyFilter(cleanImage, this.filter);
-        pushFilter(cleanImage, this.filter);
+        pushFilter(cleanImage, this.filter);//add the buttons filter
         this.button.frame = this.button.frame == 2 ? 0 : 2;
     }
 
@@ -106,50 +149,12 @@ function filterClass(game, imageKey) {
     function completeFilter() {
         if (compareImages(cleanImage, filterImage)) {
             completedPuzzle1 = true;
+          console.log("u win");
             game.state.start("GameOver");
+        }
+        else{
+          console.log("Images different...try again");
         }
     }
 
-    var blurShader = [
-        "precision mediump float;",
-
-        "varying vec2 vTextureCoord;",
-        
-        "uniform sampler2D uSampler;",
-
-        "void main(void) {",
-
-            "vec4 sum = vec4(0.0);",
-
-            "vec2 tc = vTextureCoord;",
-
-            "float resolution = 600.0;",
-            "float radius = 2.0;",
-            "vec2 dir = vec2(1.0, 1.0);",
-
-            "float blur = radius/resolution;",
-
-            "float hstep = dir.x;",
-            "float vstep = dir.y;",
-
-            "sum += texture2D(uSampler, vec2(tc.x - 4.0*blur*hstep, tc.y - 4.0*blur*vstep)) * 0.0162162162;",
-            "sum += texture2D(uSampler, vec2(tc.x - 3.0*blur*hstep, tc.y - 3.0*blur*vstep)) * 0.0540540541;",
-            "sum += texture2D(uSampler, vec2(tc.x - 2.0*blur*hstep, tc.y - 2.0*blur*vstep)) * 0.1216216216;",
-            "sum += texture2D(uSampler, vec2(tc.x - 1.0*blur*hstep, tc.y - 1.0*blur*vstep)) * 0.1945945946;",
-
-            "sum += texture2D(uSampler, vec2(tc.x, tc.y)) * 0.2270270270;",
-
-            "sum += texture2D(uSampler, vec2(tc.x + 1.0*blur*hstep, tc.y + 1.0*blur*vstep)) * 0.1945945946;",
-            "sum += texture2D(uSampler, vec2(tc.x + 2.0*blur*hstep, tc.y + 2.0*blur*vstep)) * 0.1216216216;",
-            "sum += texture2D(uSampler, vec2(tc.x + 3.0*blur*hstep, tc.y + 3.0*blur*vstep)) * 0.0540540541;",
-            "sum += texture2D(uSampler, vec2(tc.x + 4.0*blur*hstep, tc.y + 4.0*blur*vstep)) * 0.0162162162;",
-
-            //discard alpha for our simple demo, multiply by vertex color and return
-            // "gl_FragColor = vec4(sum.rgb, 1.0);",
-            "gl_FragColor = sum;",
-
-        "}",
-
-    ];
 }
-

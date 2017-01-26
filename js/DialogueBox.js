@@ -1,4 +1,3 @@
-
 var line = [];
 var wordIndex = 0;
 var lineIndex = 0;

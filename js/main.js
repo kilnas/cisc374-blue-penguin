@@ -70,6 +70,7 @@ var mainState = {
  //       }
  //     }
 
+
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
     game.input.onTap.add(onTap, this);
