@@ -29,7 +29,7 @@ function filterClass(game, imageKey, shaders) {
     for (var i=0; i < this.shaders.length; i++){
       this.filters[i] = new Phaser.Filter(game, null, this.shaders[i][0]);
       this.filters[i].name = this.shaders[i][1];
-      this.filters[i].passes = this.shaders[i][2];
+      //this.filters[i].passes = this.shaders[i][2];
     }
   }
 
