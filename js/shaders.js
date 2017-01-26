@@ -40,3 +40,134 @@ var blurShader = [
                   
                   ];
 
+
+var grayscaleShader = [
+                       "precision mediump float;",
+                       
+                       "varying vec2 vTextureCoord;",
+                       
+                       "uniform sampler2D uSampler;",
+                       
+                       "void main(void) {",
+                       
+                       "vec4 color = vec4(0.0);",
+                       
+                       "vec2 tc = vTextureCoord;",
+                       
+                       "float sum = 0.0;",
+                       "float average = 0.0;",
+                       
+                       "color = texture2D(uSampler, tc);",
+                       "sum = color.x + color.y + color.z;",
+                       "average = sum / 3.0;",
+                       
+                       "gl_FragColor = vec4(average, average, average, 0.0);",
+                       
+                       "}",
+                       
+                       ];
+
+var arithmeticAddShader = [
+                           "precision mediump float;",
+                           
+                           "varying vec2 vTextureCoord;",
+                           
+                           "uniform sampler2D uSampler;",
+                           
+                           "void main(void) {",
+                           
+                           "vec4 color = vec4(0.0);",
+                           
+                           "color = texture2D(uSampler, vTextureCoord);",
+                           
+                           "color.x = (color.x * 256.0 + 10.0) / 256.0;",
+                           "color.y = (color.y * 256.0 + 10.0) / 256.0;",
+                           "color.z = (color.z * 256.0 + 10.0) / 256.0;",
+                           
+                           "gl_FragColor = color;",
+                           
+                           "}",
+                           
+                           ];
+
+var arithmeticSubShader = [
+                           "precision mediump float;",
+                           
+                           "varying vec2 vTextureCoord;",
+                           
+                           "uniform sampler2D uSampler;",
+                           
+                           "void main(void) {",
+                           
+                           "vec4 color = vec4(0.0);",
+                           
+                           "color = texture2D(uSampler, vTextureCoord);",
+                           
+                           "color.x = (color.x * 256.0 - 10.0) / 256.0;",
+                           "color.y = (color.y * 256.0 - 10.0) / 256.0;",
+                           "color.z = (color.z * 256.0 - 10.0) / 256.0;",
+                           
+                           "gl_FragColor = color;",
+                           
+                           "}",
+                           
+                           ];
+
+var removeRedShader = [
+                       "precision mediump float;",
+                       
+                       "varying vec2 vTextureCoord;",
+                       
+                       "uniform sampler2D uSampler;",
+                       
+                       "void main(void) {",
+                       
+                       "vec4 color = vec4(0.0);",
+                       
+                       "color = texture2D(uSampler, vTextureCoord);",
+                       
+                       "gl_FragColor = vec4(0.0, color.y, color.z, 0.0);",
+                       
+                       "}",
+                       
+                       ];
+
+var removeGreenShader = [
+                         "precision mediump float;",
+                         
+                         "varying vec2 vTextureCoord;",
+                         
+                         "uniform sampler2D uSampler;",
+                         
+                         "void main(void) {",
+                         
+                         "vec4 color = vec4(0.0);",
+                         
+                         "color = texture2D(uSampler, vTextureCoord);",
+                         
+                         "gl_FragColor = vec4(color.x, 0.0, color.z, 0.0);",
+                         
+                         "}",
+                         
+                         ];
+
+var removeBlueShader = [
+                        "precision mediump float;",
+                        
+                        "varying vec2 vTextureCoord;",
+                        
+                        "uniform sampler2D uSampler;",
+                        
+                        "void main(void) {",
+                        
+                        "vec4 color = vec4(0.0);",
+                        
+                        "color = texture2D(uSampler, vTextureCoord);",
+                        
+                        "gl_FragColor = vec4(color.x, color.y, 0.0, 0.0);",
+                        
+                        "}",
+                        
+                        ];
+
+

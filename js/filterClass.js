@@ -4,18 +4,17 @@
 function filterClass(game, imageKey, shaders) {
     this.game = game;
     this.imageKey = imageKey;
-    var cleanImage = null; 
+    var cleanImage = null;
     var filterImage = null;
-  this.filters = [];
-  this.shaders = shaders;
+    this.filters = [];
+    this.shaders = shaders;
   
 
-    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2); 
+    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2);
     var cameraTopY = game.camera.y + (game.height/2) - (game.camera.height/2);
 
 
     this.setup = function() {
-      
       this.makeFilters();
       this.setupImages(game, this.imageKey, this.filters);
       this.setupButtons();
@@ -68,7 +67,7 @@ function filterClass(game, imageKey, shaders) {
         this.filter = filter;
         //note: callbackContext is the FilterButton instance, not the LabelButton
         this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
-        
+
     };
 
 
@@ -79,12 +78,12 @@ function filterClass(game, imageKey, shaders) {
             image.filters = [ newFilter ];
             image.isFiltered = true;
         }
-        
+
         //toggle off
         else{
             image.filters = null;
             image.isFiltered = false;
-            
+
         }
     }
 
@@ -120,7 +119,7 @@ function filterClass(game, imageKey, shaders) {
                 image.filters = image.filters;
             }
         }
-        
+
     }
 
 
@@ -142,6 +141,4 @@ function filterClass(game, imageKey, shaders) {
             game.state.start("GameOver");
         }
     }
-
-    }
-
+}
