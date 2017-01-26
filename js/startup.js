@@ -141,6 +141,7 @@ game.state.add("GameTitle", gameTitleState);
 game.state.add("Intro", introState);
 game.state.add("Main", mainState);
 game.state.add("Level1", Level1);
+//game.state.add("Level0", Level0);
 game.state.add("Image", imageState);
 game.state.add("GameOver", gameOverState);
 game.state.start("Boot");
