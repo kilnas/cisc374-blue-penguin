@@ -4,19 +4,21 @@
 function filterClass(game, imageKey) {
     this.game = game;
     this.imageKey = imageKey;
-    var cleanImage = null; 
+    var cleanImage = null;
     var filterImage = null;
 
 
 
-    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2); 
+    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2);
     var cameraTopY = game.camera.y + (game.height/2) - (game.camera.height/2);
 
 
     this.setup = function() {
-        
+
 
         var blurFilter = new Phaser.Filter(game, null, blurShader);
+        // var blurFilter = new Phaser.Filter(game, null, greyscaleShader);
+
 
         this.setupImages(game, this.imageKey, blurFilter);
 
@@ -38,7 +40,7 @@ function filterClass(game, imageKey) {
         this.filter = filter;
         //note: callbackContext is the FilterButton instance, not the LabelButton
         this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
-        
+
     };
 
 
@@ -49,12 +51,12 @@ function filterClass(game, imageKey) {
             image.filters = [ newFilter ];
             image.isFiltered = true;
         }
-        
+
         //toggle off
         else{
             image.filters = null;
             image.isFiltered = false;
-            
+
         }
     }
 
@@ -87,7 +89,7 @@ function filterClass(game, imageKey) {
                 image.filters = image.filters;
             }
         }
-        
+
     }
 
 
@@ -114,7 +116,7 @@ function filterClass(game, imageKey) {
         "precision mediump float;",
 
         "varying vec2 vTextureCoord;",
-        
+
         "uniform sampler2D uSampler;",
 
         "void main(void) {",
@@ -151,5 +153,133 @@ function filterClass(game, imageKey) {
         "}",
 
     ];
-}
 
+    var grayscaleShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "vec2 tc = vTextureCoord;",
+
+            "float sum = 0.0;",
+            "float average = 0.0;",
+
+            "color = texture2D(uSampler, tc);",
+            "sum = color.x + color.y + color.z;",
+            "average = sum / 3.0;",
+
+            "gl_FragColor = vec4(average, average, average, 0.0);",
+
+        "}",
+
+    ];
+
+    var arithmeticAddShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "color = texture2D(uSampler, vTextureCoord);",
+
+            "color.x = (color.x * 256.0 + 10.0) / 256.0;",
+            "color.y = (color.y * 256.0 + 10.0) / 256.0;",
+            "color.z = (color.z * 256.0 + 10.0) / 256.0;",
+
+            "gl_FragColor = color;",
+
+        "}",
+
+    ];
+
+    var arithmeticSubShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "color = texture2D(uSampler, vTextureCoord);",
+
+            "color.x = (color.x * 256.0 - 10.0) / 256.0;",
+            "color.y = (color.y * 256.0 - 10.0) / 256.0;",
+            "color.z = (color.z * 256.0 - 10.0) / 256.0;",
+
+            "gl_FragColor = color;",
+
+        "}",
+
+    ];
+
+    var removeRedShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "color = texture2D(uSampler, vTextureCoord);",
+
+            "gl_FragColor = vec4(0.0, color.y, color.z, 0.0);",
+
+        "}",
+
+    ];
+
+    var removeGreenShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "color = texture2D(uSampler, vTextureCoord);",
+
+            "gl_FragColor = vec4(color.x, 0.0, color.z, 0.0);",
+
+        "}",
+
+    ];
+
+    var removeBlueShader = [
+        "precision mediump float;",
+
+        "varying vec2 vTextureCoord;",
+
+        "uniform sampler2D uSampler;",
+
+        "void main(void) {",
+
+            "vec4 color = vec4(0.0);",
+
+            "color = texture2D(uSampler, vTextureCoord);",
+
+            "gl_FragColor = vec4(color.x, color.y, 0.0, 0.0);",
+
+        "}",
+
+    ];
+}
