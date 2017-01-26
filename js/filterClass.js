@@ -4,8 +4,8 @@
 function filterClass(game, imageKey) {
     this.game = game;
     this.imageKey = imageKey;
-    var cleanimage = null; 
-    var filterimage = null;
+    var cleanImage = null; 
+    var filterImage = null;
 
 
 
@@ -21,12 +21,16 @@ function filterClass(game, imageKey) {
         this.setupImages(game, this.imageKey, blurFilter);
 
         var Dbutton;
-        Dbutton = new FilterButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 312, "emptyButton", "BLUR", blurFilter, Dbutton);
+        Dbutton = new FilterButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 310, "emptyButton", "BLUR", blurFilter, Dbutton);
         Dbutton.button.scale.setTo(2,2);
 
         var undoButton;
         undoButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 380, "emptyButton", "UNDO", undoOnClick, undoButton);
         undoButton.scale.setTo(2,2);
+
+        var completeButton;
+        completeButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 450, "emptyButton", "COMPLETE", completeFilter, completeButton);
+        completeButton.scale.setTo(2,2);
     }
 
     //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
@@ -55,12 +59,12 @@ function filterClass(game, imageKey) {
     }
 
     this.setupImages = function(game, imageKey, filters) {
-        cleanimage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
-        cleanimage.scale.setTo(0.5, 0.5);
-        filterimage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
-        filterimage.scale.setTo(0.5, 0.5);
-        filterimage.x = cameraTopX + game.camera.width - filterimage.width;
-        this.applyFilter(filterimage, filters);
+        cleanImage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
+        cleanImage.scale.setTo(0.5, 0.5);
+        filterImage = game.add.sprite(cameraTopX, cameraTopY, imageKey);
+        filterImage.scale.setTo(0.5, 0.5);
+        filterImage.x = cameraTopX + game.camera.width - filterImage.width;
+        this.applyFilter(filterImage, filters);
     }
 
     function pushFilter(image, filter) {
@@ -90,13 +94,20 @@ function filterClass(game, imageKey) {
     //default callback for FilterButtons
     function filterOnClick(){
         // applyFilter(cleanImage, this.filter);
-        pushFilter(cleanimage, this.filter);
+        pushFilter(cleanImage, this.filter);
         this.button.frame = this.button.frame == 2 ? 0 : 2;
     }
 
     function undoOnClick() {
-        popFilter(cleanimage);
+        popFilter(cleanImage);
         this.frame = this.frame == 2 ? 0 : 2;
+    }
+
+    function completeFilter() {
+        if (compareImages(cleanImage, filterImage)) {
+            completedPuzzle1 = true;
+            game.state.start("GameOver");
+        }
     }
 
     var blurShader = [

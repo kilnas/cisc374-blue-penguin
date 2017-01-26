@@ -12,14 +12,21 @@ var introState = {
   },
 
   toMain: function(){
-    game.state.start("Main");
+    // game.state.start("Main");
+    console.log("fuck");
+    game.state.start("Level1");
+
   },
 
   changeText: function(){
     console.log(this.textBoxLength);
     console.log(this.textIndex);
     if(this.textIndex == (this.textBoxLength-1)){
-      game.state.start("Main");
+      // game.state.start("Main");
+      console.log("fuck");
+
+      game.state.start("Level1");
+
     }
     else{
       this.textIndex += 1;

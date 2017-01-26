@@ -21,6 +21,7 @@ var Textbox = function(x, y, messageArray){
     this.textBG.x = this.textBG.x - this.textBG.width/2;
     this.textBG.y = this.textBG.y - this.textBG.height/2;
     this.textBG.alpha = .8;
+    this.textBG.fixedToCamera = true;
     //this.text = null;
     this.text = game.add.text(this.x, this.y, ''); //player.x, player.y
     this.text.anchor.setTo(0.5);
@@ -34,10 +35,13 @@ var Textbox = function(x, y, messageArray){
     this.text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5);
     this.text.wordWrap = true;
     this.text.wordWrapWidth = 500;
+    this.text.fixedToCamera = true;
 
 
     this.nextLine();
     createTextFlag = true;
+
+    //game.input.onDown.addOnce(removeText, this);
   }
 
 
