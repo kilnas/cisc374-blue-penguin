@@ -4,17 +4,17 @@
 function filterClass(game, imageKey) {
     this.game = game;
     this.imageKey = imageKey;
-    var cleanImage = null; 
+    var cleanImage = null;
     var filterImage = null;
 
 
 
-    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2); 
+    var cameraTopX = game.camera.x + (game.width/2) - (game.camera.width/2);
     var cameraTopY = game.camera.y + (game.height/2) - (game.camera.height/2);
 
 
     this.setup = function() {
-        
+
 
         var blurFilter = new Phaser.Filter(game, null, blurShader);
 
@@ -31,6 +31,12 @@ function filterClass(game, imageKey) {
         var completeButton;
         completeButton = new LabelButton(game, cameraTopX + (game.camera.width/2), cameraTopY + 450, "emptyButton", "COMPLETE", completeFilter, completeButton);
         completeButton.scale.setTo(2,2);
+
+
+
+        //add slider material
+        var sliderBox;
+
     }
 
     //FilterButton is a container class that holds a LabelButton (set up for filtering) and other variables, like the filter object to be applied.
@@ -38,7 +44,7 @@ function filterClass(game, imageKey) {
         this.filter = filter;
         //note: callbackContext is the FilterButton instance, not the LabelButton
         this.button = new LabelButton(game, x, y, key, label, filterOnClick, this, overFrame, outFrame, downFrame, upFrame)
-        
+
     };
 
 
@@ -49,12 +55,12 @@ function filterClass(game, imageKey) {
             image.filters = [ newFilter ];
             image.isFiltered = true;
         }
-        
+
         //toggle off
         else{
             image.filters = null;
             image.isFiltered = false;
-            
+
         }
     }
 
@@ -87,7 +93,7 @@ function filterClass(game, imageKey) {
                 image.filters = image.filters;
             }
         }
-        
+
     }
 
 
@@ -114,7 +120,7 @@ function filterClass(game, imageKey) {
         "precision mediump float;",
 
         "varying vec2 vTextureCoord;",
-        
+
         "uniform sampler2D uSampler;",
 
         "void main(void) {",
@@ -151,5 +157,5 @@ function filterClass(game, imageKey) {
         "}",
 
     ];
-}
 
+}

@@ -1,4 +1,3 @@
-
 var line = [];
 var wordIndex = 0;
 var lineIndex = 0;
@@ -61,19 +60,13 @@ var DialogueBox = function(x, y, messageArray){
 
   this.removeText = function(){
 
-    if(!(typeof textBG === "undefined")){
-      //this.textBG.destroy();
-      this.textBG.alpha = 0;
+    //this.textBG.destroy();
+    this.textBG.alpha = 0;
       this.text.alpha = 0; //destroy();
-<<<<<<< HEAD
-      createTextFlag = false;
-    }
-=======
       createDiaFlag = false;
       console.log('remove dialog');
     wordIndex = 0;
     lineIndex = 0;
->>>>>>> 59661deb7205eddf8f66a80693f079fb656fa717
   }
 
 
