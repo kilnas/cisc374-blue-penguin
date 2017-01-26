@@ -58,64 +58,6 @@ var mainState = {
 
 
 
-
-    var level2 = [
-     'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-     'x              x                                      x',
-     'x              x                                      x',
-     'x              x                                      x',
-     'x              x       x                              x',
-     'x                      x                           xxxx',
-     'x                      x                x          x',
-     'x                      x                x          x',
-     'xxxxxxxxxxxxxxxxxxxxxxxx                x          x',
-     '                                        x          x',
-     '                                        x          x',
-     '                                        x          x',
-     '                                        x          x',
-     '                                        x          x',
-     'x      xxxxxx          xxx    xxx       xxxxxxxxxxxx',
-     'x         x            xxxx  xxxx                 x',
-     'x         x             xxxxxxxx                  x',
-     'x         x              xxxxxx                   x',
-     'x      xxxxxx              xx                     x',
-     'x                                                 x',
-     'x                                                 x',
-     'x                                                 x',
-     'x      xxxxxx  x   x  xxxx  xxxxx  x     xxxxxxx  x',
-     'x         x    x   x  x  x    x    x     x        x',
-     'x         x    x   x  x x     x    x     xxxxx    x',
-     'x         x     xxx   x  x    x    x     x        x',
-     'x         x                        xxxxx xxxxx    x',
-     'x         x                                       x',
-     'x         x                                       x',
-     'x         x                                       x',
-     'x         x                                       x',
-     'x         xxxxxxxxxxxxxx      xxxxxxxxxxxxxxxxxxxxx',
-     'x         x            x      x                    ',
-     'x         x            x      x                    ',
-     'x         x            x      x           x        ',
-     'x         xxxxxxx      x      x           x       x',
-     'x         x                   x           x       x',
-     'x         x                   xxxxxxxxxxxxx       x',
-     'x         x                               x       x',
-     'x         x                               x       x',
-     'x       xxxxxxxxxxxxxxxx     xxxxxxxx     x       x',
-     'x       x                    x            x       x',
-     'x       x                    x            x       x',
-     'x       x                    x            x       x',
-     'x       x                    x            x       x',
-     'x       x      xxxxxxxxx     x            x       x',
-     'x                      x     x            x       x',
-     'x                      x     xxxxxxxxxxxxxx       x',
-     'x                      x                          x',
-     'x                      x                          x',
-     'x                      x                          x',
-     'xxxxxxxxxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxxxxxxxxx',
- ];
-
-
-
  // for (var i = 0; i < level.length; i++) {
  //     for (var j = 0; j < level[i].length; j++) {
  //
@@ -197,7 +139,7 @@ var mainState = {
       player.body.angularVelocity = 0;
 
       game.physics.arcade.collide(player, testSprite, collidePerson, null, this);
-      game.physics.arcade.collide(player, testImage2, this.stateChangeCollision, null, this);
+      //game.physics.arcade.collide(player, npc, this.stateChangeCollision, null, this); //testImage2
 
       game.physics.arcade.collide(player, turtle, this.stateChangeCollision, null, this);
       game.physics.arcade.collide(player, wallGroup, wallCollision, null, this);

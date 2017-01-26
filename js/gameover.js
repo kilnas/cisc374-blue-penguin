@@ -3,7 +3,7 @@ var gameOverState = {
 
     //reset starting game variable to true, so we start from the beginning
     startingGame = true;
-    
+
     //display the title of the game
     var name = game.add.text(80, 80, 'You Win!', { font: '50px Arial', fill: '#ffffff' });
 
@@ -17,10 +17,18 @@ var gameOverState = {
   },
 
   start: function(){
-    game.state.start('Main');
+    startingGame = true;
+    solvedTurtle = false;
+    completedPuzzle1 = false;
+    foundPerson = false;
+    game.state.start('Level0');
   },
 
   menu: function(){
+    startingGame = true;
+    solvedTurtle = false;
+    completedPuzzle1 = false;
+    foundPerson = false;
     game.state.start('GameTitle');
   }
 }
