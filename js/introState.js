@@ -14,9 +14,9 @@ var introState = {
 
 
     //introSlideText = game.add.text(80, 80, intro2[0], {font: "25px Arial", fill: "#ffffff" });
-    introSlideText = game.add.text(game.world.centerX - 40, game.world.centerY - 50, intro2, style);
+    introSlideText = game.add.text(game.world.centerX - 40, game.world.centerY - 50, intro, style);
     introSlideText.anchor.set(0.5);
-    this.textBoxLength = intro2.length;
+    this.textBoxLength = intro.length;
   },
 
   toMain: function(){
